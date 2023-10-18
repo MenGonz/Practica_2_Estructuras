@@ -12,6 +12,6 @@ with open("empleados.csv") as datos:
 with open("password.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
-        pwd.append([row[0], row[1], row[3]])
+        pwd.append([row[0], row[1], row[2]])
 
-print(pwd)
+print(Empleados)
