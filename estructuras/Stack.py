@@ -1,21 +1,21 @@
-from lista_enlazada import *
+from List import List
 
-class pila_enlazada(lista_enlazada):
+class Stack(List):
     def __init__(self, dato_inicial=None):
         super().__init__(dato_inicial)
         
     def push(self, datos):
-        self.add_final(datos)
+        self.addLast(datos)
         
     def pop(self):
         if self.size != 0:
             ret = self.cola.dato
-            self.remove_final()
+            self.removeLast()
             return ret
         else:
             return None
         
-    def peek(self):
+    def top(self):
         if self.size != 0: 
             return self.cola.dato
         else:
