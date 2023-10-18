@@ -1,4 +1,4 @@
-from Empleado import *
+from estructuras.Empleado import *
 Empleados = []
 with open("datos.csv") as datos:
     lector = csv.reader(datos)
