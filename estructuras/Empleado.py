@@ -1,5 +1,5 @@
 class Empleado: #Se define la clase usuario
-    def __init__(self,nombre,id,fecha_nac=None,ciudad_nac=None,tel=None,dir=None,email=None):
+    def __init__(self,nombre,id,fecha_nac=None,ciudad_nac=None,tel=None,dir=None,email=None, rol =  None, pwd = None):
         self.id = id
         self.nombre = nombre
         self.fecha_nac = fecha_nac
@@ -7,6 +7,8 @@ class Empleado: #Se define la clase usuario
         self.dir = dir
         self.tel = tel
         self.email = email
+        self.rol = rol
+        self.pwd = pwd
         
     #Getters
     def get_id(self):
@@ -23,6 +25,10 @@ class Empleado: #Se define la clase usuario
         return self.tel
     def get_email(self):
         return self.email
+    def get_rol(self):
+        return self.rol
+    def get_pwd(self):
+        return self.pwd
     
     #Setters
     def set_id(self, id):
@@ -39,6 +45,10 @@ class Empleado: #Se define la clase usuario
         self.tel = tel
     def set_email(self, email):
         self.email = email
+    def set_pwd(self, pwd):
+        self.pwd = pwd
+    def set_rol(self, rol):
+        self.rol = rol
     #Tostring  
     def __str__(self):
         

@@ -1,7 +1,7 @@
 import csv
 from Empleado import *
 Empleados: list[Empleado] = []
-pwd = []
+Pwd = []
 
 with open("empleados.csv") as datos:
     lector = csv.reader(datos)
@@ -17,16 +17,17 @@ with open("password.csv") as datos:
 user = input("Ingrese su id")
 pwd = input("Ingrese la contraseña")
 empleado = None
+confirmacion = False
 for i in range(len(Empleados)):
     if Empleados[i].get_id() == user:
-        if pwd[i][1] == pwd:
+        if Pwd[i][1] == pwd:
             empleado = Empleados[i]
+            confirmacion = True
+            empleado.set_pwd(pwd)
+            empleado.set_rol(Pwd[i][2])
+            break
         else:
             print("Contraseña incorrecta")
-    else:
-        print("Este usuario no existe")
-
-        
         
     
     
