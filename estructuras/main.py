@@ -12,7 +12,7 @@ with open("empleados.csv") as datos:
 with open("password.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
-        pwd.append([row[0], row[1], row[2]])
+        Pwd.append([row[0], row[1], row[2]])
 
 user = input("Ingrese su id")
 pwd = input("Ingrese la contraseña")
