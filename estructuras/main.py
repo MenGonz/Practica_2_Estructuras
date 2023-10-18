@@ -12,7 +12,21 @@ with open("empleados.csv") as datos:
 with open("password.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
-        pwd.append([row[0], row[1], row[2]])
+        Pwd.append([row[0], row[1], row[2]])
 
-print(Empleados)
- 
+user = input("Ingrese su id")
+pwd = input("Ingrese la contraseña")
+empleado = None
+for i in range(len(Empleados)):
+    if Empleados[i].get_id() == user:
+        if pwd[i][1] == pwd:
+            empleado = Empleados[i]
+        else:
+            print("Contraseña incorrecta")
+    else:
+        print("Este usuario no existe")
+
+        
+        
+    
+    
