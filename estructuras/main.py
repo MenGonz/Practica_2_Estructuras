@@ -1,19 +1,8 @@
-from lista_doble_enlazada import *
-from lista_enlazada import *
+from Empleado import *
+Empleados = []
+with open("datos.csv") as datos:
+    lector = csv.reader(datos)
+    for row in lector:
+        empleado = Empleado(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
+        Empleados.append(empleado)
 
-l = list(map(int, input().split()))
-le = lista_enlazada()
-lde = lista_doble_enlazada()
-for x in l:
-    le.add_final(x)
-    lde.add_final(x)
-    
-for x in l:
-    print(le.buscar_bin(x+3),end=" ")
-print("\n")
-for x in l:
-    print(lde.buscar_bin(x+3),end=" ")
-print("\n")
-
-print(le.get_size())
-print(lde.get_size())
