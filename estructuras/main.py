@@ -1,6 +1,6 @@
 import csv
 from Empleado import *
-Empleados = []
+Empleados: list[Empleado] = []
 pwd = []
 
 with open("empleados.csv") as datos:
