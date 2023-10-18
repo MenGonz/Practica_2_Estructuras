@@ -1,7 +1,7 @@
 import csv
 from Empleado import Empleado
 Empleados: list[Empleado] = []
-Pwd = []
+Pwd: list[list[str]] = []
 
 with open("empleados.csv") as datos:
     lector = csv.reader(datos)
