@@ -1,6 +1,6 @@
 from Node import Node
 
-class List():
+class List:
     
     size: int
     head: Node

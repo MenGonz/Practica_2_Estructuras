@@ -1,7 +1,7 @@
 
 from DoubleNode import DoubleNode
 
-class DoubleList():
+class DoubleList:
     
     size: int
     head: DoubleNode
@@ -48,6 +48,21 @@ class DoubleList():
             self.tail = self.tail.prev
             self.tail.next = None
             self.size -= 1
+    
+    ###
+    def remove(self, key, value):
+        if self.size != 0:
+            curr: DoubleNode = self.head
+            while curr.dato.key != value and curr.next != None:
+                curr = curr.next
+            if curr.dato == key:
+                prev = curr.prev
+                next = curr.next
+                prev.next = next
+                next.prev = prev
+                curr.next = None
+                curr.prev = None
+                
     
     def getSize(self) -> int:
         return self.size
