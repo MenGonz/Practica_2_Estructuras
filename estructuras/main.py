@@ -106,7 +106,7 @@ def cambiar_contraseña():
 
             writer.writerow(vec_password)
     
-def menu(empleado: Empleado):
+def menu(empleado: Empleado): 
 
     if empleado==None:
         print("El usuario no se encuentra registrado")  
