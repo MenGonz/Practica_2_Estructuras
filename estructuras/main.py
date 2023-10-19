@@ -14,7 +14,48 @@ def proyectar_borrador_guardado():
 def enviar_mensaje():
     ...
 def registrar_nuevo_usuario():
-    ...
+    #Obtiene la informacion
+    nombre = input("Ingrese el nombre del usuario: ")
+    id = input("Ingrese el id del usuario: ")
+    fecha_nac = input("Ingrese la fecha de nacimiento del usuario: ")
+    ciudad_nac = input("Ingrese la ciudad de nacimiento del usuario: ")
+    dir = input("Ingrese la dirección del usuario: ")
+    tel = input("Ingrese el teléfono del usuario: ")
+    email = input("Ingrese el email del usuario: ")
+    pwd = input("Ingrese la contraseña del usuario: ")
+    rol = input("Ingrese el rol del usuario")
+    #Genera el empleado
+    nuevo_empleado = Empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
+    Empleados.append(nuevo_empleado)
+    #listas para añadir a los archivos de texto
+    vec_empleados = [Empleados[0].get_nombre(), Empleados[0].get_id(), Empleados[0].get_fecha_nac(),
+                     Empleados[0].get_ciudad_nac(), Empleados[0].get_tel(), Empleados[0].get_email(), Empleados[0].get_dir()]
+    vec_password = [Empleados[0].get_id(), Empleados[0].get_pwd(), Empleados[0].get_rol()]
+    #añade en ambos archivos en la primera posicion
+    with open('empleados.csv', 'w', encoding='UTF8', newline='') as f:
+        writer = csv.writer(f)
+
+        writer.writerow(vec_empleados)
+    
+    with open('password.csv', 'w', encoding='UTF8', newline='') as f:
+        writer = csv.writer(f)
+
+        writer.writerow(vec_password)
+    #Añade el resto de posiciones
+    for i in range(1, len(Empleados)):
+        vec_empleados = [Empleados[i].get_nombre(), Empleados[i].get_id(), Empleados[i].get_fecha_nac(),
+                        Empleados[i].get_ciudad_nac(), Empleados[i].get_tel(), Empleados[i].get_email(), Empleados[i].get_dir()]
+        vec_password = [Empleados[i].get_id(), Empleados[i].get_pwd(), Empleados[i].get_rol()]
+        #añade en ambos archivos en la primera posicion
+        with open('empleados.csv', 'a', encoding='UTF8', newline='') as f:
+            writer = csv.writer(f)
+
+            writer.writerow(vec_empleados)
+        
+        with open('password.csv', 'a', encoding='UTF8', newline='') as f:
+            writer = csv.writer(f)
+
+            writer.writerow(vec_password)
 def cambiar_contraseña():
     ...
     
