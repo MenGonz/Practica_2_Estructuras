@@ -136,16 +136,16 @@ def menu(empleado: Empleado):
         else:
             print("Opción no válida")
     
-Empleados: list[Empleado] = []
-Pwd: list[list[str]] = []
+Empleados = []
+Pwd = []
 
-with open("estructuras\empleados.csv") as datos:
+with open("empleados.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
         empleado: Empleado = Empleado(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
         Empleados.append(empleado)
 
-with open("estructuras\password.csv") as datos:
+with open("password.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
         Pwd.append([row[0], row[1], row[2]])
