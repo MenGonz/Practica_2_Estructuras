@@ -10,8 +10,10 @@ from Mensaje import Mensaje
 
 
 
-def mostrar_bandeja_entrada():
-    ...
+def mostrar_bandeja_entrada(empleado: Empleado):
+    node = empleado.bandeja_entrada.head
+    print(node.to_string_bandeja())
+    
 def mentsaje_leido():
     ...
 def revisar_mensajes_leidos():
@@ -148,7 +150,7 @@ def menu(empleado: Empleado):
         """)    
     
         if op == "1":
-            mostrar_bandeja_entrada()
+            mostrar_bandeja_entrada(empleado)
         elif op == "2":
             revisar_mensajes_leidos()
         elif op == "3":
