@@ -11,10 +11,7 @@ def mostrar_bandeja_entrada():
 def mentsaje_leido():
     ...
 def revisar_mensajes_leidos():
-    mensaje = "Mensaje leído desde la bandeja de entrada"
-    cola_mensajes_leidos.put(mensaje)
-    print("Mensaje leído y añadido a la cola de mensajes leídos.")
-
+    ...
 def proyectar_borrador_guardado():
     ...
 def enviar_mensaje():
@@ -68,7 +65,7 @@ def cambiar_contraseña():
 def menu(empleado: Empleado):
 
     if empleado==None:
-        print("El usuario no se encuentra registrado")
+        print("El usuario no se encuentra registrado")  
     
     elif empleado.get_rol() == "empleado":
          print("---------------------Bienvenido empleado------------------------")
@@ -142,8 +139,8 @@ continuar: bool = True
 while continuar:
     print("Bienvenido al sistema de mensajería")
     
-    user: str = input("Ingrese su id")
-    pwd: str = input("Ingrese la contraseña")
+    user: str = input("Ingrese su id: ")
+    pwd: str = input("Ingrese la contraseña: ")
     empleado = None
     confirmacion: bool = False
     for i in range(len(Empleados)):
@@ -159,5 +156,5 @@ while continuar:
                 print("Contraseña incorrecta")
             
     menu(empleado)
-    continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no)") == "si" 
+    continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no): ") == "si" 
         
