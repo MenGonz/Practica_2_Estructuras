@@ -1,4 +1,5 @@
 import csv
+import Queue
 from Empleado import Empleado
 
 
@@ -7,8 +8,13 @@ from Empleado import Empleado
 
 def mostrar_bandeja_entrada():
     ...
-def revisar_mensajes_leidos():
+def mentsaje_leido():
     ...
+def revisar_mensajes_leidos():
+    mensaje = "Mensaje leído desde la bandeja de entrada"
+    cola_mensajes_leidos.put(mensaje)
+    print("Mensaje leído y añadido a la cola de mensajes leídos.")
+
 def proyectar_borrador_guardado():
     ...
 def enviar_mensaje():
@@ -23,15 +29,14 @@ def registrar_nuevo_usuario():
     tel = input("Ingrese el teléfono del usuario: ")
     email = input("Ingrese el email del usuario: ")
     pwd = input("Ingrese la contraseña del usuario: ")
-    rol = input("Ingrese el rol del usuario: ")
+    rol = input("Ingrese el rol del usuario")
     #Genera el empleado
     nuevo_empleado = Empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
     Empleados.append(nuevo_empleado)
-    Pwd.append([id, pwd, rol])
     #listas para añadir a los archivos de texto
     vec_empleados = [Empleados[0].get_nombre(), Empleados[0].get_id(), Empleados[0].get_fecha_nac(),
                      Empleados[0].get_ciudad_nac(), Empleados[0].get_tel(), Empleados[0].get_email(), Empleados[0].get_dir()]
-    vec_password = [Empleados[0].get_id(), Pwd[0][1], Pwd[0][2]]
+    vec_password = [Empleados[0].get_id(), Empleados[0].get_pwd(), Empleados[0].get_rol()]
     #añade en ambos archivos en la primera posicion
     with open('empleados.csv', 'w', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
@@ -46,7 +51,7 @@ def registrar_nuevo_usuario():
     for i in range(1, len(Empleados)):
         vec_empleados = [Empleados[i].get_nombre(), Empleados[i].get_id(), Empleados[i].get_fecha_nac(),
                         Empleados[i].get_ciudad_nac(), Empleados[i].get_tel(), Empleados[i].get_email(), Empleados[i].get_dir()]
-        vec_password = [Empleados[i].get_id(), Pwd[i][1], Pwd[i][2]]
+        vec_password = [Empleados[i].get_id(), Empleados[i].get_pwd(), Empleados[i].get_rol()]
         #añade en ambos archivos en la primera posicion
         with open('empleados.csv', 'a', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
@@ -61,26 +66,29 @@ def cambiar_contraseña():
     ...
     
 def menu(empleado: Empleado):
+
+    if empleado==None:
+        print("El usuario no se encuentra registrado")
     
-    if empleado.get_rol() == "empleado":
-        print("---------------------Bienvenido empleado------------------------")
+    elif empleado.get_rol() == "empleado":
+         print("---------------------Bienvenido empleado------------------------")
     
-        op : str = input("""Seleccione una opción:
+         op : str = input("""Seleccione una opción:
             1. Revisar bandeja de entrada
             2. Revisar mensajes leidos
             3. Proyectar Borrador guardado
             4. Enviar mensaje 
              """)
     
-        if op == "1":
+         if op == "1":
             mostrar_bandeja_entrada()
-        elif op == "2":
+         elif op == "2":
             revisar_mensajes_leidos()
-        elif op == "3":
+         elif op == "3":
             proyectar_borrador_guardado()
-        elif op == "4":
+         elif op == "4":
             enviar_mensaje()
-        else:
+         else:
             print("Opción no válida")    
         
     
@@ -93,8 +101,7 @@ def menu(empleado: Empleado):
             3. Proyectar Borrador guardado
             4. Enviar mensaje
             5. Registrar nuevo usuario
-            6. Cambiar contraseña
-            """)    
+            6. Cambiar contraseña""")    
     
         if op == "1":
             mostrar_bandeja_entrada()
@@ -114,24 +121,29 @@ def menu(empleado: Empleado):
 Empleados: list[Empleado] = []
 Pwd: list[list[str]] = []
 
-with open("empleados.csv") as datos:
+with open("estructuras\empleados.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
         empleado: Empleado = Empleado(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
         Empleados.append(empleado)
 
-with open("password.csv") as datos:
+with open("estructuras\password.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
         Pwd.append([row[0], row[1], row[2]])
+
+with open("data.txt","r+") as datos:
+    for row in datos:
+        print(row)
+
 
 
 continuar: bool = True
 while continuar:
     print("Bienvenido al sistema de mensajería")
     
-    user: str = input("Ingrese su id: ")
-    pwd: str = input("Ingrese la contraseña: ")
+    user: str = input("Ingrese su id")
+    pwd: str = input("Ingrese la contraseña")
     empleado = None
     confirmacion: bool = False
     for i in range(len(Empleados)):
@@ -141,10 +153,11 @@ while continuar:
                 confirmacion = True
                 empleado.set_pwd(pwd)
                 empleado.set_rol(Pwd[i][2])
+                print(empleado.get_rol())
                 break
             else:
                 print("Contraseña incorrecta")
             
     menu(empleado)
-    continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no)") == "si"
+    continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no)") == "si" 
         
