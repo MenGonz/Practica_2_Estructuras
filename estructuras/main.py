@@ -181,8 +181,31 @@ with open("data.txt","r+") as datos:
     for row in datos:
         sep=row.split(" ")
         id=sep[0]
-        correo.addLast(id)      
-
+        correo.addLast(id)
+    identificaciones= DoubleList()
+    Bandeja_Entrada=DoubleList()
+    Mensajes_leidos=Queue()
+    Borradores=Stack()
+    iterador=correo.head
+    contador=0
+    while iterador!=None:
+        info=correo.getValue(contador)
+        informacion=info.split("_")
+        identificaciones.addLast(informacion[0])
+        mensajes=informacion[1].split("-")
+        for i in mensajes:
+           Bandeja_Entrada.addFirst(i)
+        mensajes=informacion[2].split("-")
+        for j in mensajes:
+           Mensajes_leidos.enqueue(j)
+        mensajes=informacion[1].split("-")
+        for k in mensajes:
+           Borradores.push(k)
+        iterador=iterador.getNext
+    print(identificaciones)
+    print(Bandeja_Entrada)
+    print(Mensajes_leidos)
+    print(Borradores)
 
 
 continuar: bool = True
