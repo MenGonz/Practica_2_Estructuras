@@ -9,12 +9,12 @@ from Empleado import Empleado
 from Mensaje import Mensaje
 from Almacenamiento import Almacenamiento
 
-
-
 def mostrar_bandeja_entrada(empleado: Empleado):
     node = empleado.bandeja_entrada.head
     print(node.to_string_bandeja())
     
+
+
 def mentsaje_leido():
     ...
 def revisar_mensajes_leidos():
