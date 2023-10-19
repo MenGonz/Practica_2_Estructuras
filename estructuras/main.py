@@ -68,12 +68,14 @@ def menu(empleado: Empleado):
     elif empleado.get_rol() == "empleado":
          print("---------------------Bienvenido empleado------------------------")
     
-         op : str = input("""Seleccione una opción:
-            1. Revisar bandeja de entrada
-            2. Revisar mensajes leidos
-            3. Proyectar Borrador guardado
-            4. Enviar mensaje 
-             """)
+         op : str = input(
+        """Seleccione una opción:
+                          
+        1. Revisar bandeja de entrada
+        2. Revisar mensajes leidos
+        3. Proyectar Borrador guardado
+        4. Enviar mensaje    
+        """)
     
          if op == "1":
             mostrar_bandeja_entrada()
@@ -91,12 +93,14 @@ def menu(empleado: Empleado):
         print("---------------------Bienvenido administrador------------------------")
     
         op : str =input("""Seleccione una opción:
-            1. Revisar bandeja de entrada
-            2. Revisar mensajes leidos
-            3. Proyectar Borrador guardado
-            4. Enviar mensaje
-            5. Registrar nuevo usuario
-            6. Cambiar contraseña""")    
+                        
+        1. Revisar bandeja de entrada
+        2. Revisar mensajes leidos
+        3. Proyectar Borrador guardado
+        4. Enviar mensaje
+        5. Registrar nuevo usuario
+        6. Cambiar contraseña
+                        """)    
     
         if op == "1":
             mostrar_bandeja_entrada()
