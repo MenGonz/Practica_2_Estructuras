@@ -1,4 +1,5 @@
-
+from DoubleList import DoubleList
+from Mensaje import Mensaje
 class Empleado: #Se define la clase usuario
     
     id: str
@@ -10,6 +11,8 @@ class Empleado: #Se define la clase usuario
     email: str
     rol: str
     pwd: str
+    bandeja_entrada: DoubleList
+    mensajes_leidos: DoubleList
     
     def __init__(self,nombre,id,fecha_nac=None,ciudad_nac=None,tel=None,dir=None,email=None, rol =  None, pwd = None):
         self.id = id
@@ -21,6 +24,7 @@ class Empleado: #Se define la clase usuario
         self.email = email
         self.rol = rol
         self.pwd = pwd
+        self.bandeja_entrada = DoubleList()
         
     #Getters
     def get_id(self):
@@ -62,6 +66,20 @@ class Empleado: #Se define la clase usuario
     def set_rol(self, rol):
         self.rol = rol
         
+    def recibir_mensaje(self,mensaje:Mensaje):
+        ...
+        #self.bandeja_entrada.addLast(Mensaje)
+        
+    def leer_mensaje(self,titulo:str):
+        curr: Mensaje = self.bandeja_entrada.head
+        for i in range(self.bandeja_entrada.size()):
+            if curr.titulo == titulo:
+                self.mensajes_leidos.addLast()
+                print(Mensaje)
+                break
+        else:
+            raise Exception("El correo con el título requerido no existe")
+            
         
     #Tostring  
     def __str__(self):
@@ -73,3 +91,5 @@ class Empleado: #Se define la clase usuario
                    Teléfono: {self.get_tel()}
                    Email: {self.get_email()}"""
                    
+                   
+    
