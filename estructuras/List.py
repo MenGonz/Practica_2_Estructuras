@@ -89,8 +89,8 @@ class List:
         curr: Node = self.head
         s: str = ""
         while curr != None:
-            s += f"{curr.dato} -> "
-            curr = curr.sig
+            s += f"{curr.data} -> "
+            curr = curr.next
         return s[:-4]
     
 if __name__ == "__main__":
