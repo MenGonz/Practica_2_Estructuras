@@ -32,10 +32,10 @@ with open("password.csv") as datos:
     for row in lector:
         Pwd.append([row[0], row[1], row[2]])
 
-user = input("Ingrese su id")
-pwd = input("Ingrese la contraseña")
+user: str = input("Ingrese su id")
+pwd: str = input("Ingrese la contraseña")
 empleado = None
-confirmacion = False
+confirmacion: bool = False
 for i in range(len(Empleados)):
     if Empleados[i].get_id() == user:
         if Pwd[i][1] == pwd: 
@@ -49,7 +49,7 @@ for i in range(len(Empleados)):
             
 if empleado.get_rol() == "empleado":
     print("---------------------Bienvenido empleado------------------------")
-    op = input("""Seleccione una opción:
+    op : str = input("""Seleccione una opción:
           1. Revisar bandeja de entrada
           2. Revisar mensajes leidos
           3. Proyectar Borrador guardado
@@ -69,7 +69,7 @@ if empleado.get_rol() == "empleado":
         
     
 elif empleado.get_rol() == "administrador":
-    op =input("""Seleccione una opción:
+    op : str =input("""Seleccione una opción:
         1. Revisar bandeja de entrada
         2. Revisar mensajes leidos
         3. Proyectar Borrador guardado
