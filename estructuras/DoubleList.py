@@ -8,11 +8,11 @@ class DoubleList:
     tail: DoubleNode
     
     def __init__(self, datos=None):
-     self.size = 0
-     self.head = None
-     self.tail = None
-     if datos is not None:
-        self.addLast(datos)
+        self.size = 0
+        self.head = None
+        self.tail = None
+        if datos is not None:
+            self.addLast(datos)
             
     def addLast(self, datos):
         if self.size == 0:
@@ -37,22 +37,22 @@ class DoubleList:
         self.size += 1
         
     def removeFirst(self):
-      if self.size != 0:
-        self.head = self.head.next
-        if self.head is not None:
-            self.head.prev = None
-        else:
-            self.tail = None
-        self.size -= 1
+        if self.size != 0:
+            self.head = self.head.next
+            if self.head is not None:
+                self.head.prev = None
+            else:
+                self.tail = None
+            self.size -= 1
 
     def removeLast(self):
-      if self.size != 0:
-        self.tail = self.tail.prev
-        if self.tail is not None:
-            self.tail.next = None
-        else:
-            self.head = None
-        self.size -= 1
+        if self.size != 0:
+            self.tail = self.tail.prev
+            if self.tail is not None:
+                self.tail.next = None
+            else:
+                self.head = None
+            self.size -= 1
     
     
     def remove(self, value):
