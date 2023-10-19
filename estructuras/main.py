@@ -55,6 +55,7 @@ if empleado.get_rol() == "empleado":
           3. Proyectar Borrador guardado
           4. Enviar mensaje 
              """)
+    
     if op == "1":
         mostrar_bandeja_entrada()
     elif op == "2":
@@ -75,6 +76,7 @@ elif empleado.get_rol() == "administrador":
         4. Enviar mensaje
         5. Registrar nuevo usuario
         6. Cambiar contraseña""")    
+    
     if op == "1":
         mostrar_bandeja_entrada()
     elif op == "2":
