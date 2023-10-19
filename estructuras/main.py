@@ -154,7 +154,7 @@ with open("password.csv") as datos:
     for row in lector:
         Pwd.append([row[0], row[1], row[2]])
 
-with open("estructuras\data.txt","r+") as datos:
+with open("data.txt","r+") as datos:
     iden = DoubleList
     print(iden)
     for row in datos:
