@@ -57,20 +57,36 @@ class DoubleList():
     def getSize(self) -> int:
         return self.size
     
+    def getValue(self,data)-> int:
+        curr: DoubleNode = self.head
+        cont=0
+        while cont<data:
+            curr = curr.next
+            cont+=1
+        return curr.data
+    
+    def getPlace(self,data)->int:
+        curr: DoubleNode = self.head
+        cont=0
+        while curr.data!=data and curr.next!= None:
+            curr=curr.next
+            cont+=1
+        return cont
+   
     def buscar_der(self, data) -> bool:
         curr: DoubleNode = self.head
-        while curr.dato != data and curr.next != None:
+        while curr.data != data and curr.next != None:
             curr = curr.next
-        if curr.dato == data:
+        if curr.data == data:
             return True
         else:
             return False
         
     def buscar_izq(self, data) -> bool:
         curr: DoubleNode = self.tail
-        while curr.dato != data and curr.prev != None:
+        while curr.data != data and curr.prev != None:
             curr = curr.prev
-        if curr.dato == data:
+        if curr.data == data:
             return True
         else:
             return False
@@ -89,9 +105,9 @@ class DoubleList():
         left: DoubleNode = self.head
         while right != left:
             med: DoubleNode = mid(left, right)
-            if med.dato == data or  right.dato == data:
+            if med.data == data or  right.data == data:
                 return True
-            elif med.dato < data:
+            elif med.data < data:
                 left = med.next
             else:
                 right = med
@@ -102,6 +118,7 @@ class DoubleList():
         curr: DoubleNode = self.head
         s = ""
         while curr != None:
-            s += f"{curr.dato} <-> "
+            s += f"{curr.data} <-> "
             curr = curr.next
         return s[:-5]
+
