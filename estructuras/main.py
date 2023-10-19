@@ -160,13 +160,6 @@ Pwd = Almacenamiento.get_Passwords()
 
 """
 with open("data.txt","r+") as datos:
-<<<<<<< Updated upstream
-    correo = DoubleList()
-    for row in datos:
-        sep=row.split(" ")
-        id=sep[0]
-        correo.addLast(id)      
-=======
     iden = DoubleList()
     print(iden)
     for row in datos:
@@ -176,7 +169,6 @@ with open("data.txt","r+") as datos:
         iden.addLast(2)
         print(iden)
 """
->>>>>>> Stashed changes
 
 
 
