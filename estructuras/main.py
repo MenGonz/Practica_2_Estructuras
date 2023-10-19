@@ -45,6 +45,7 @@ def revisar_mensajes_leidos():
             break
         
 def proyectar_borrador_guardado():
+    #print(Borradores.top)
     ...
     
 def enviar_mensaje(empleado: Empleado):
