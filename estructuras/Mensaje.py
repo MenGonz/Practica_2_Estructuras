@@ -1,4 +1,4 @@
-from Empleado import Empleado
+"""from Empleado import Empleado"""
 class Mensaje:
     
     cedula_receptor: str
