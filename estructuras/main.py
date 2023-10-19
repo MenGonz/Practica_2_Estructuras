@@ -7,6 +7,7 @@ from Stack import Stack
 from DoubleList import DoubleList
 from Empleado import Empleado
 from Mensaje import Mensaje
+from Almacenamiento import Almacenamiento
 
 
 
@@ -20,15 +21,7 @@ def proyectar_borrador_guardado():
     ...
 
 
-def search_by_email(email:str) -> Empleado:
-    '''Busca un empleado por su email y lo retorna, si no lo encuentra lanza una excepcion'''
-    for emp in Empleados:
-        if emp.email == email:
-            return emp
-    raise Exception("Email incorrecto")
 
-def search_by_cedula(cedula:str) -> Empleado:
-    ...
         
     
 def enviar_mensaje(empleado: Empleado):
@@ -162,26 +155,28 @@ def menu(empleado: Empleado):
         else:
             print("Opción no válida")
     
-Empleados = []
-Pwd = []
+Empleados = Almacenamiento.get_Empleados()
+Pwd = Almacenamiento.get_Passwords()
 
-with open("empleados.csv") as datos:
-    lector = csv.reader(datos)
-    for row in lector:
-        empleado: Empleado = Empleado(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
-        Empleados.append(empleado)
-
-with open("password.csv") as datos:
-    lector = csv.reader(datos)
-    for row in lector:
-        Pwd.append([row[0], row[1], row[2]])
-
+"""
 with open("data.txt","r+") as datos:
+<<<<<<< Updated upstream
     correo = DoubleList()
     for row in datos:
         sep=row.split(" ")
         id=sep[0]
         correo.addLast(id)      
+=======
+    iden = DoubleList()
+    print(iden)
+    for row in datos:
+        sep=row.split(" ")
+        id=sep[0]
+        id=DoubleNode
+        iden.addLast(2)
+        print(iden)
+"""
+>>>>>>> Stashed changes
 
 
 
