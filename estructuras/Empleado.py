@@ -67,8 +67,7 @@ class Empleado: #Se define la clase usuario
         self.rol = rol
         
     def recibir_mensaje(self,mensaje:Mensaje):
-        ...
-        #self.bandeja_entrada.addLast(Mensaje)
+        self.bandeja_entrada.addLast(Mensaje)
         
     def leer_mensaje(self,titulo:str):
         curr: Mensaje = self.bandeja_entrada.head
@@ -92,4 +91,10 @@ class Empleado: #Se define la clase usuario
                    Email: {self.get_email()}"""
                    
                    
-    
+    def to_string_bandeja(self):
+        s: str = ""
+        curr: Mensaje = self.bandeja_entrada.head
+        for i in range(self.bandeja_entrada.size()):
+            s += f"{i}. Emisor: {curr.cedula_emisor}\nTítulo: {curr.titulo}\n"
+            curr = curr.next
+        return s[:-1]

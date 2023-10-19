@@ -7,6 +7,7 @@ from Stack import Stack
 from DoubleList import DoubleList
 from Empleado import Empleado
 from Mensaje import Mensaje
+from Almacenamiento import Almacenamiento
 
 
 
@@ -20,28 +21,18 @@ def revisar_mensajes_leidos():
     ...
 def proyectar_borrador_guardado():
     ...
-
-
-def search_by_email(email:str) -> Empleado:
-    '''Busca un empleado por su email y lo retorna, si no lo encuentra lanza una excepcion'''
-    for emp in Empleados:
-        if emp.email == email:
-            return emp
-    raise Exception("Email incorrecto")
-
-def search_by_cedula(cedula:str) -> Empleado:
-    ...
-        
     
 def enviar_mensaje(empleado: Empleado):
     '''Envia un mensaje a un empleado.
     Recibe como parámetro el emisor del mensaje.'''
     email:str = input("Ingrese el email del destinatario: ")
-    destinatario: Empleado = search_by_email(email)
+    destinatario: Empleado = Almacenamiento.search_by_email(email)
     titulo: str = input("Ingrese el titulo del mensaje: ")
     cuerpo: str = input("Cuerpo del mensaje: ")
     mensaje: Mensaje = Mensaje(destinatario.get_id(),titulo,cuerpo,empleado.get_id)
-    destinatario.recibir_mensaje()
+    destinatario.recibir_mensaje(mensaje)
+    print("El mensaje ha sido enviado con éxito")
+    
     
 def registrar_nuevo_usuario():
     #Obtiene la informacion
@@ -164,27 +155,41 @@ def menu(empleado: Empleado):
         else:
             print("Opción no válida")
     
-Empleados = []
-Pwd = []
+Empleados = Almacenamiento.get_Empleados()
+Pwd = Almacenamiento.get_Passwords()
 
-with open("empleados.csv") as datos:
-    lector = csv.reader(datos)
-    for row in lector:
-        empleado: Empleado = Empleado(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
-        Empleados.append(empleado)
-
-with open("password.csv") as datos:
-    lector = csv.reader(datos)
-    for row in lector:
-        Pwd.append([row[0], row[1], row[2]])
 
 with open("data.txt","r+") as datos:
     correo = DoubleList()
+    print(iden)
     for row in datos:
         sep=row.split(" ")
         id=sep[0]
-        correo.addLast(id)      
-
+        correo.addLast(id)
+    identificaciones= DoubleList()
+    Bandeja_Entrada=DoubleList()
+    Mensajes_leidos=Queue()
+    Borradores=Stack()
+    iterador=correo.head
+    contador=0
+    while iterador!=None:
+        info=correo.getValue(contador)
+        informacion=info.split("_")
+        identificaciones.addLast(informacion[0])
+        mensajes=informacion[1].split("-")
+        for i in mensajes:
+           Bandeja_Entrada.addFirst(i)
+        mensajes=informacion[2].split("-")
+        for j in mensajes:
+           Mensajes_leidos.enqueue(j)
+        mensajes=informacion[1].split("-")
+        for k in mensajes:
+           Borradores.push(k)
+        iterador=iterador.getNext
+    print(identificaciones)
+    print(Bandeja_Entrada)
+    print(Mensajes_leidos)
+    print(Borradores)
 
 
 continuar: bool = True
