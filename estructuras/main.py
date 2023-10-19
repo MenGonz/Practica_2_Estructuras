@@ -3,9 +3,6 @@ import Queue
 from Empleado import Empleado
 
 
-
-
-
 def mostrar_bandeja_entrada():
     ...
 def mentsaje_leido():
@@ -59,6 +56,7 @@ def registrar_nuevo_usuario():
             writer = csv.writer(f)
 
             writer.writerow(vec_password)
+
 def cambiar_contraseña():
     ...
     
