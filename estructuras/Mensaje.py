@@ -6,7 +6,7 @@ class Mensaje:
     titulo: str
     contenido: str
     
-    def __init__(self, cedula_receptor, titulo, contenido, cedula_emisor):
+    def __init__(self, cedula_receptor: str, titulo: str, contenido: str, cedula_emisor: str):
         self.cedula_receptor = cedula_receptor
         self.titulo = titulo
         self.contenido = contenido
