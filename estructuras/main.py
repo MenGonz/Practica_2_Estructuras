@@ -158,37 +158,43 @@ Empleados = Almacenamiento.get_Empleados()
 Pwd = Almacenamiento.get_Passwords()
 
 
-with open("data.txt","r+") as datos:
+with open("data.txt", "r+") as datos:
     correo = DoubleList()
-    print(iden)
     for row in datos:
-        sep=row.split(" ")
-        id=sep[0]
+        sep = row.split(" ")
+        id = sep[0]
         correo.addLast(id)
-    identificaciones= DoubleList()
-    Bandeja_Entrada=DoubleList()
-    Mensajes_leidos=Queue()
-    Borradores=Stack()
-    iterador=correo.head
+
+    identificaciones = DoubleList()
+    Bandeja_Entrada = DoubleList()
+    Mensajes_leidos = Queue()
+    Borradores = Stack()
     contador=0
-    while iterador!=None:
-        info=correo.getValue(contador)
-        informacion=info.split("_")
+
+    iterador = correo.head
+    while iterador is not None:
+        info = correo.getValue(contador)
+        informacion = info.split("_")
         identificaciones.addLast(informacion[0])
-        mensajes=informacion[1].split("-")
-        for i in mensajes:
-           Bandeja_Entrada.addFirst(i)
-        mensajes=informacion[2].split("-")
-        for j in mensajes:
-           Mensajes_leidos.enqueue(j)
-        mensajes=informacion[1].split("-")
-        for k in mensajes:
-           Borradores.push(k)
-        iterador=iterador.getNext
-    print(identificaciones)
-    print(Bandeja_Entrada)
-    print(Mensajes_leidos)
-    print(Borradores)
+        
+        mensajes_bandeja = informacion[1].split("-")
+        for i in mensajes_bandeja:
+            Bandeja_Entrada.addLast(i)
+            
+        mensajes_leidos = informacion[2].split("-")
+        for j in mensajes_leidos:
+            Mensajes_leidos.enqueue(j)
+            
+        mensajes_borradores = informacion[3].split("-")
+        for k in mensajes_borradores:
+            Borradores.push(k)
+        contador+=1
+        iterador = iterador.getNext()
+
+    print("Identificaciones:", identificaciones)
+    print("Bandeja de Entrada:", Bandeja_Entrada)
+    print("Mensajes Leídos:", Mensajes_leidos)
+    print("Borradores:", Borradores)
 
 
 continuar: bool = True
