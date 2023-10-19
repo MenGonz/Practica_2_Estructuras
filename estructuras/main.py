@@ -92,13 +92,13 @@ def cambiar_contraseña():
         if Empleados[i].get_id() == id:
             Pwd[i][1] = contra
             break
-    vec_password = [Empleados[0].get_id(), Empleados[0].get_pwd(), Empleados[0].get_rol()]
+    vec_password = [Pwd[0][0], Pwd[0][1], Pwd[0][2]]
     with open('password.csv', 'w', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
 
         writer.writerow(vec_password)
     for i in range(1, len(Empleados)):
-        vec_password = [Empleados[i].get_id(), Empleados[i].get_pwd(), Empleados[i].get_rol()]
+        vec_password = [Pwd[i][0], Pwd[i][1], Pwd[i][2]]
         #añade en ambos archivos en la primera posicion  
         with open('password.csv', 'a', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
