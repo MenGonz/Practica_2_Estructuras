@@ -5,8 +5,9 @@ class Mensaje:
     cedula_emisor: str
     titulo: str
     contenido: str
+    id: int
     
-    def __init__(self, cedula_receptor: str, titulo: str, contenido: str, cedula_emisor: str):
+    def __init__(self, cedula_receptor: str, titulo: str, contenido: str, cedula_emisor: str, id: int = None):
         self.cedula_receptor = cedula_receptor
         self.titulo = titulo
         self.contenido = contenido
@@ -29,3 +30,6 @@ class Mensaje:
         
     def set_titulo(self, titulo: str):
         self.titulo = titulo
+        
+    def get_id(self) -> int:
+        return self.id
