@@ -146,5 +146,5 @@ while continuar:
                 print("Contraseña incorrecta")
             
     menu(empleado)
-    continuar = input("Desea elegir otra opción del menú? (si/no): ") == "si"
+    continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no)") == "si"
         
