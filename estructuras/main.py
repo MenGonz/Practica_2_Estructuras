@@ -8,7 +8,7 @@ from DoubleList import DoubleList
 from Empleado import Empleado
 from Mensaje import Mensaje
 from Almacenamiento import Almacenamiento
-
+ 
 def mostrar_bandeja_entrada(empleado: Empleado):
     print(empleado.to_string_bandeja())
 
