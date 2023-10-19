@@ -92,3 +92,10 @@ class List:
             s += f"{curr.dato} -> "
             curr = curr.sig
         return s[:-4]
+    
+if __name__ == "__main__":
+    lista: list[int] = list(map(int, input().split()))
+    l: List = List()
+    for x in lista:
+        l.addLast(x)
+    print(l)
