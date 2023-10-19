@@ -7,7 +7,7 @@ from Mensaje import Mensaje
 from Stack import Stack
 from DoubleList import DoubleList
 from Empleado import Empleado
-
+ 
 
 def mostrar_bandeja_entrada():
     ...
