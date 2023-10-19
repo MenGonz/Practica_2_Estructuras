@@ -72,7 +72,7 @@ class DoubleList:
                 curr.next = None
             self.size -= 1
         else:
-            raise Exception("El valor no existe en la lista")
+            raise Exception(f"El valor {value} no existe en la lista")
                 
     
     def getSize(self) -> int:
@@ -94,19 +94,10 @@ class DoubleList:
             cont+=1
         return cont
    
-    def buscar_der(self, data) -> bool:
+    def buscar(self, data) -> bool:
         curr: DoubleNode = self.head
         while curr.data != data and curr.next != None:
             curr = curr.next
-        if curr.data == data:
-            return True
-        else:
-            return False
-        
-    def buscar_izq(self, data) -> bool:
-        curr: DoubleNode = self.tail
-        while curr.data != data and curr.prev != None:
-            curr = curr.prev
         if curr.data == data:
             return True
         else:

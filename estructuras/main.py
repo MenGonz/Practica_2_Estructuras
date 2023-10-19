@@ -92,6 +92,8 @@ def enviar_mensaje(empleado: Empleado):
     
     
 def registrar_nuevo_usuario():
+    """Esta funcionalidad se encarga de registrar un nuevo usuario en el sistema."""
+    
     #Obtiene la informacion
     nombre = input("Ingrese el nombre del usuario: ")
     id = input("Ingrese el id del usuario: ")
@@ -102,38 +104,10 @@ def registrar_nuevo_usuario():
     email = input("Ingrese el email del usuario: ")
     pwd = input("Ingrese la contraseña del usuario: ")
     rol = input("Ingrese el rol del usuario")
-    #Genera el empleado
-    nuevo_empleado = Empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
-    Empleados.append(nuevo_empleado)
-    #listas para añadir a los archivos de texto
-    vec_empleados = [Empleados[0].get_nombre(), Empleados[0].get_id(), Empleados[0].get_fecha_nac(),
-                     Empleados[0].get_ciudad_nac(), Empleados[0].get_tel(), Empleados[0].get_email(), Empleados[0].get_dir()]
-    vec_password = [Empleados[0].get_id(), Empleados[0].get_pwd(), Empleados[0].get_rol()]
-    #añade en ambos archivos en la primera posicion
-    with open('empleados.csv', 'w', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
-
-        writer.writerow(vec_empleados)
     
-    with open('password.csv', 'w', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
-
-        writer.writerow(vec_password)
-    #Añade el resto de posiciones
-    for i in range(1, len(Empleados)):
-        vec_empleados = [Empleados[i].get_nombre(), Empleados[i].get_id(), Empleados[i].get_fecha_nac(),
-                        Empleados[i].get_ciudad_nac(), Empleados[i].get_tel(), Empleados[i].get_email(), Empleados[i].get_dir()]
-        vec_password = [Empleados[i].get_id(), Empleados[i].get_pwd(), Empleados[i].get_rol()]
-        #añade en ambos archivos en la primera posicion
-        with open('empleados.csv', 'a', encoding='UTF8', newline='') as f:
-            writer = csv.writer(f)
-
-            writer.writerow(vec_empleados)
-        
-        with open('password.csv', 'a', encoding='UTF8', newline='') as f:
-            writer = csv.writer(f)
-
-            writer.writerow(vec_password)
+    
+    Almacenamiento.crear_empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
+   
 
 
 
@@ -143,25 +117,19 @@ def registrar_nuevo_usuario():
 
 
 def cambiar_contraseña():
+    """Esta funcionalidad se encarga de cambiar la contraseña de un usuario."""
+    
+    #Obtenemos la información
     id = input("Ingrese el Id del empleado al que se le hara el cambio de contraseña")
     contra = input("Ingrese la nueva contraseña: ")
-    for i in range(len(Empleados)):
-        if Empleados[i].get_id() == id:
-            Pwd[i][1] = contra
-            break
-    vec_password = [Pwd[0][0], Pwd[0][1], Pwd[0][2]]
-    with open('password.csv', 'w', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
-
-        writer.writerow(vec_password)
-    for i in range(1, len(Empleados)):
-        vec_password = [Pwd[i][0], Pwd[i][1], Pwd[i][2]]
-        #añade en ambos archivos en la primera posicion  
-        with open('password.csv', 'a', encoding='UTF8', newline='') as f:
-            writer = csv.writer(f)
-
-            writer.writerow(vec_password)
     
+    
+    """
+    Es mejor dejar que la clase Almacenamiento se encargue de todo lo relacionado con el csv
+    por cuestiones de organización y mantenibilidad.
+    Por ese motivo se llama al método cambiar_contraseña de la clase Almacenamiento
+    """
+    Almacenamiento.cambiar_contraseña(id, contra)    
     
     
     
@@ -241,6 +209,10 @@ def menu(empleado: Empleado):
 Empleados = Almacenamiento.get_Empleados()
 Pwd = Almacenamiento.get_Passwords()
 
+
+
+
+
 #Este código da errores, además es mejor meterlo en una función aparte y llamarla desde aquí
 """
 with open("data.txt", "r+") as datos:
@@ -281,7 +253,9 @@ with open("data.txt", "r+") as datos:
     print("Mensajes Leídos:", Mensajes_leidos)
     print("Borradores:", Borradores)
     
-"""
+"""#<<<------Este código daba errores, por eso lo comenté
+#Además es mejor meterlo en una función aparte y llamarla desde aquí,
+#tal como hemos hecho con todo.
 
 if __name__ == "__main__":
     
