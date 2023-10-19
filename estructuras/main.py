@@ -1,7 +1,11 @@
 import csv
-import Queue
-import DoubleList
-import DoubleNode
+from Queue import Queue
+from Node import Node
+from DoubleNode import DoubleNode
+from List import List
+from Mensaje import Mensaje
+from Stack import Stack
+from DoubleList import DoubleList
 from Empleado import Empleado
 
 
@@ -150,13 +154,14 @@ with open("password.csv") as datos:
     for row in lector:
         Pwd.append([row[0], row[1], row[2]])
 
-with open("data.txt","r+") as datos:
+with open("estructuras\data.txt","r+") as datos:
     iden = DoubleList
     print(iden)
     for row in datos:
         sep=row.split(" ")
         id=sep[0]
-        iden.self.addlast(id)
+        id=DoubleNode
+        iden.addLast(1,2)
         print(iden)
         
 
