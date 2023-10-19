@@ -60,7 +60,24 @@ def registrar_nuevo_usuario():
             writer.writerow(vec_password)
 
 def cambiar_contraseña():
-    ...
+    id = input("Ingrese el Id del empleado al que se le hara el cambio de contraseña")
+    contra = input("Ingrese la nueva contraseña: ")
+    for i in range(len(Empleados)):
+        if Empleados[i].get_id() == id:
+            Pwd[i][1] = contra
+            break
+    vec_password = [Empleados[0].get_id(), Empleados[0].get_pwd(), Empleados[0].get_rol()]
+    with open('password.csv', 'w', encoding='UTF8', newline='') as f:
+        writer = csv.writer(f)
+
+        writer.writerow(vec_password)
+    for i in range(1, len(Empleados)):
+        vec_password = [Empleados[i].get_id(), Empleados[i].get_pwd(), Empleados[i].get_rol()]
+        #añade en ambos archivos en la primera posicion  
+        with open('password.csv', 'a', encoding='UTF8', newline='') as f:
+            writer = csv.writer(f)
+
+            writer.writerow(vec_password)
     
 def menu(empleado: Empleado):
 
