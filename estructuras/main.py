@@ -184,7 +184,7 @@ with open("data.txt","r+") as datos:
         sep=row.split(" ")
         id=sep[0]
         id=DoubleNode
-        iden.addLast(1,2)
+        iden.addLast(2)
         print(iden)
         
 
