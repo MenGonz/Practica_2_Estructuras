@@ -3,7 +3,6 @@ from Queue import Queue
 from Node import Node
 from DoubleNode import DoubleNode
 from List import List
-from Mensaje import Mensaje
 from Stack import Stack
 from DoubleList import DoubleList
 from Empleado import Empleado
@@ -178,14 +177,13 @@ with open("password.csv") as datos:
         Pwd.append([row[0], row[1], row[2]])
 
 with open("data.txt","r+") as datos:
-    iden = DoubleList
-    print(iden)
+    iden = DoubleList()
     for row in datos:
         sep=row.split(" ")
         id=sep[0]
-        id=DoubleNode
-        iden.addLast(2)
-        print(iden)
+        iden.addLast(id)
+    print(iden.getValue(0))
+       
         
 
 
