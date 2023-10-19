@@ -14,11 +14,14 @@ def mostrar_bandeja_entrada(empleado: Empleado):
 
 
 def mentsaje_leido():
-    ...
+    leido=Bandeja_Entrada.removeFirst()
+    Mensajes_leidos.enqueue(leido)
+    
 def revisar_mensajes_leidos():
-    ...
+    print(mensajes_leidos)
+    
 def proyectar_borrador_guardado():
-    ...
+    print(Borradores.top)
     
 def enviar_mensaje(empleado: Empleado):
     '''Envia un mensaje a un empleado.
