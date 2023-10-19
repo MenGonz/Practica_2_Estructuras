@@ -1,4 +1,15 @@
 class Empleado: #Se define la clase usuario
+    
+    id: str
+    nombre: str
+    fecha_nac: str
+    ciudad_nac: str
+    dir: str
+    tel: str
+    email: str
+    rol: str
+    pwd: str
+    
     def __init__(self,nombre,id,fecha_nac=None,ciudad_nac=None,tel=None,dir=None,email=None, rol =  None, pwd = None):
         self.id = id
         self.nombre = nombre
