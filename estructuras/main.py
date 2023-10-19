@@ -100,7 +100,7 @@ def menu(empleado: Empleado):
         4. Enviar mensaje
         5. Registrar nuevo usuario
         6. Cambiar contraseña
-                        """)    
+        """)    
     
         if op == "1":
             mostrar_bandeja_entrada()
@@ -132,8 +132,13 @@ with open("estructuras\password.csv") as datos:
         Pwd.append([row[0], row[1], row[2]])
 
 with open("data.txt","r+") as datos:
+    iden=[]
     for row in datos:
-        print(row)
+        sep=row.split(" ")
+        id=sep[0]
+        iden.append(id)
+        print(iden)
+        
 
 
 
