@@ -143,26 +143,27 @@ def menu(empleado: Empleado):
 Empleados = []
 Pwd = []
 
-with open("empleados.csv") as datos:
+with open("estructuras\empleados.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
         empleado: Empleado = Empleado(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
         Empleados.append(empleado)
 
-with open("password.csv") as datos:
+with open("estructuras\password.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
         Pwd.append([row[0], row[1], row[2]])
 
 with open("estructuras\data.txt","r+") as datos:
-    iden = DoubleList
+    iden = DoubleList()
     print(iden)
     for row in datos:
         sep=row.split(" ")
         id=sep[0]
-        id=DoubleNode
-        iden.addLast(1,2)
-        print(iden)
+        iden.addLast(id)
+    print(iden)
+    print(iden.tail)
+        
         
 
 
