@@ -178,12 +178,12 @@ with open("password.csv") as datos:
         Pwd.append([row[0], row[1], row[2]])
 
 with open("data.txt","r+") as datos:
-    iden = DoubleList
+    iden = DoubleList()
     print(iden)
     for row in datos:
         sep=row.split(" ")
         id=sep[0]
-        id=DoubleNode
+        id=DoubleNode()
         iden.addLast(2)
         print(iden)
         
