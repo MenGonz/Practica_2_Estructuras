@@ -103,7 +103,7 @@ def registrar_nuevo_usuario():
     tel = input("Ingrese el teléfono del usuario: ")
     email = input("Ingrese el email del usuario: ")
     pwd = input("Ingrese la contraseña del usuario: ")
-    rol = input("Ingrese el rol del usuario")
+    rol = input("Ingrese el rol del usuario: ")
     
     
     Almacenamiento.crear_empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
@@ -213,7 +213,8 @@ Pwd = Almacenamiento.get_Passwords()
 
 
 
-#Este código da errores, además es mejor meterlo en una función aparte y llamarla desde aquí
+#Este código da errores, además es mejor meterlo en un método en Almacenamiento y llamarlo desde aquí
+#Para ejemplo, revísese la funcionalidad de registrar_nuevo_usuario
 """
 with open("data.txt", "r+") as datos:
     correo = DoubleList()
@@ -254,8 +255,10 @@ with open("data.txt", "r+") as datos:
     print("Borradores:", Borradores)
     
 """#<<<------Este código daba errores, por eso lo comenté
-#Además es mejor meterlo en una función aparte y llamarla desde aquí,
-#tal como hemos hecho con todo.
+#Además es mejor meterlo en un Método en Almacenamiento y llamarlo desde aquí,
+#tal como hemos hecho con la funcionalidad de registrar_nuevo_usuario.
+
+
 
 if __name__ == "__main__":
     
