@@ -179,16 +179,16 @@ with open("data.txt", "r+") as datos:
         identificaciones.addLast(informacion[0])
         
         mensajes_bandeja = informacion[1].split("-")
-        for i in mensajes_bandeja:
-            Bandeja_Entrada.addLast(i)
+        for mensaje in mensajes_bandeja:
+            Bandeja_Entrada.addLast(mensaje)
             
         mensajes_leidos = informacion[2].split("-")
-        for j in mensajes_leidos:
-            Mensajes_leidos.enqueue(j)
+        for mensaje in mensajes_leidos:
+            Mensajes_leidos.enqueue(mensaje)
             
         mensajes_borradores = informacion[3].split("-")
-        for k in mensajes_borradores:
-            Borradores.push(k)
+        for mensaje in mensajes_borradores:
+            Borradores.push(mensaje)
         contador+=1
         iterador = iterador.getNext()
 
