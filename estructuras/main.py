@@ -19,20 +19,18 @@ def revisar_mensajes_leidos():
     ...
 def proyectar_borrador_guardado():
     ...
-
-
-
-        
     
 def enviar_mensaje(empleado: Empleado):
     '''Envia un mensaje a un empleado.
     Recibe como parámetro el emisor del mensaje.'''
     email:str = input("Ingrese el email del destinatario: ")
-    destinatario: Empleado = search_by_email(email)
+    destinatario: Empleado = Almacenamiento.search_by_email(email)
     titulo: str = input("Ingrese el titulo del mensaje: ")
     cuerpo: str = input("Cuerpo del mensaje: ")
     mensaje: Mensaje = Mensaje(destinatario.get_id(),titulo,cuerpo,empleado.get_id)
-    destinatario.recibir_mensaje()
+    destinatario.recibir_mensaje(mensaje)
+    print("El mensaje ha sido enviado con éxito")
+    
     
 def registrar_nuevo_usuario():
     #Obtiene la informacion
