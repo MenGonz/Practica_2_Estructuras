@@ -1,4 +1,4 @@
-
+from Empleado import Empleado
 class Mensaje:
     
     cedula_receptor: str
@@ -33,3 +33,10 @@ class Mensaje:
         
     def get_id(self) -> int:
         return self.id
+    
+    def __str__(self) -> str:
+        return f"""De: {self.cedula_emisor}
+                Para: {self.cedula_receptor}
+                Título: {self.titulo}
+                Cuerpo:
+                {self.contenido}"""

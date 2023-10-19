@@ -7,7 +7,9 @@ from Mensaje import Mensaje
 from Stack import Stack
 from DoubleList import DoubleList
 from Empleado import Empleado
- 
+from Mensaje import Mensaje
+
+
 
 def mostrar_bandeja_entrada():
     ...
@@ -17,8 +19,29 @@ def revisar_mensajes_leidos():
     ...
 def proyectar_borrador_guardado():
     ...
-def enviar_mensaje():
+
+
+def search_by_email(email:str) -> Empleado:
+    '''Busca un empleado por su email y lo retorna, si no lo encuentra lanza una excepcion'''
+    for emp in Empleados:
+        if emp.email == email:
+            return emp
+    raise Exception("Email incorrecto")
+
+def search_by_cedula(cedula:str) -> Empleado:
     ...
+        
+    
+def enviar_mensaje(empleado: Empleado):
+    '''Envia un mensaje a un empleado.
+    Recibe como parámetro el emisor del mensaje.'''
+    email:str = input("Ingrese el email del destinatario: ")
+    destinatario: Empleado = search_by_email(email)
+    titulo: str = input("Ingrese el titulo del mensaje: ")
+    cuerpo: str = input("Cuerpo del mensaje: ")
+    mensaje: Mensaje = Mensaje(destinatario.get_id(),titulo,cuerpo,empleado.get_id)
+    destinatario.recibir_mensaje()
+    
 def registrar_nuevo_usuario():
     #Obtiene la informacion
     nombre = input("Ingrese el nombre del usuario: ")
