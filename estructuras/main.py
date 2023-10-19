@@ -23,14 +23,15 @@ def registrar_nuevo_usuario():
     tel = input("Ingrese el teléfono del usuario: ")
     email = input("Ingrese el email del usuario: ")
     pwd = input("Ingrese la contraseña del usuario: ")
-    rol = input("Ingrese el rol del usuario")
+    rol = input("Ingrese el rol del usuario: ")
     #Genera el empleado
     nuevo_empleado = Empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
     Empleados.append(nuevo_empleado)
+    Pwd.append([id, pwd, rol])
     #listas para añadir a los archivos de texto
     vec_empleados = [Empleados[0].get_nombre(), Empleados[0].get_id(), Empleados[0].get_fecha_nac(),
                      Empleados[0].get_ciudad_nac(), Empleados[0].get_tel(), Empleados[0].get_email(), Empleados[0].get_dir()]
-    vec_password = [Empleados[0].get_id(), Empleados[0].get_pwd(), Empleados[0].get_rol()]
+    vec_password = [Empleados[0].get_id(), Pwd[0][1], Pwd[0][2]]
     #añade en ambos archivos en la primera posicion
     with open('empleados.csv', 'w', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
@@ -45,7 +46,7 @@ def registrar_nuevo_usuario():
     for i in range(1, len(Empleados)):
         vec_empleados = [Empleados[i].get_nombre(), Empleados[i].get_id(), Empleados[i].get_fecha_nac(),
                         Empleados[i].get_ciudad_nac(), Empleados[i].get_tel(), Empleados[i].get_email(), Empleados[i].get_dir()]
-        vec_password = [Empleados[i].get_id(), Empleados[i].get_pwd(), Empleados[i].get_rol()]
+        vec_password = [Empleados[i].get_id(), Pwd[i][1], Pwd[i][2]]
         #añade en ambos archivos en la primera posicion
         with open('empleados.csv', 'a', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
@@ -92,7 +93,8 @@ def menu(empleado: Empleado):
             3. Proyectar Borrador guardado
             4. Enviar mensaje
             5. Registrar nuevo usuario
-            6. Cambiar contraseña""")    
+            6. Cambiar contraseña
+            """)    
     
         if op == "1":
             mostrar_bandeja_entrada()
@@ -128,8 +130,8 @@ continuar: bool = True
 while continuar:
     print("Bienvenido al sistema de mensajería")
     
-    user: str = input("Ingrese su id")
-    pwd: str = input("Ingrese la contraseña")
+    user: str = input("Ingrese su id: ")
+    pwd: str = input("Ingrese la contraseña: ")
     empleado = None
     confirmacion: bool = False
     for i in range(len(Empleados)):
