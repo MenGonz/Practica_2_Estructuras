@@ -1,7 +1,11 @@
 import csv
 from Queue import Queue
-from DoubleList import DoubleList
+from Node import Node
 from DoubleNode import DoubleNode
+from List import List
+from Mensaje import Mensaje
+from Stack import Stack
+from DoubleList import DoubleList
 from Empleado import Empleado
 from Mensaje import Mensaje
 
@@ -83,7 +87,24 @@ def registrar_nuevo_usuario():
             writer.writerow(vec_password)
 
 def cambiar_contraseña():
-    ...
+    id = input("Ingrese el Id del empleado al que se le hara el cambio de contraseña")
+    contra = input("Ingrese la nueva contraseña: ")
+    for i in range(len(Empleados)):
+        if Empleados[i].get_id() == id:
+            Pwd[i][1] = contra
+            break
+    vec_password = [Empleados[0].get_id(), Empleados[0].get_pwd(), Empleados[0].get_rol()]
+    with open('password.csv', 'w', encoding='UTF8', newline='') as f:
+        writer = csv.writer(f)
+
+        writer.writerow(vec_password)
+    for i in range(1, len(Empleados)):
+        vec_password = [Empleados[i].get_id(), Empleados[i].get_pwd(), Empleados[i].get_rol()]
+        #añade en ambos archivos en la primera posicion  
+        with open('password.csv', 'a', encoding='UTF8', newline='') as f:
+            writer = csv.writer(f)
+
+            writer.writerow(vec_password)
     
 def menu(empleado: Empleado):
 
@@ -142,16 +163,16 @@ def menu(empleado: Empleado):
         else:
             print("Opción no válida")
     
-Empleados: list[Empleado] = []
-Pwd: list[list[str]] = []
+Empleados = []
+Pwd = []
 
-with open("estructuras\empleados.csv") as datos:
+with open("empleados.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
         empleado: Empleado = Empleado(row[0],row[1],row[2],row[3],row[4],row[5],row[6])
         Empleados.append(empleado)
 
-with open("estructuras\password.csv") as datos:
+with open("password.csv") as datos:
     lector = csv.reader(datos)
     for row in lector:
         Pwd.append([row[0], row[1], row[2]])
@@ -162,7 +183,8 @@ with open("data.txt","r+") as datos:
     for row in datos:
         sep=row.split(" ")
         id=sep[0]
-        iden.self.addlast(id)
+        id=DoubleNode
+        iden.addLast(1,2)
         print(iden)
         
 

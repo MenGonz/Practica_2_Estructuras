@@ -8,12 +8,11 @@ class DoubleList:
     tail: DoubleNode
     
     def __init__(self, datos=None):
-        if datos != None:
-            self.size = 1
-            self.head = DoubleNode(datos)
-            self.tail = self.head
-        else:
-            self.size = 0
+     self.size = 0
+     self.head = None
+     self.tail = None
+     if datos is not None:
+        self.addLast(datos)
             
     def addLast(self, datos):
         if self.size == 0:
@@ -38,16 +37,22 @@ class DoubleList:
         self.size += 1
         
     def removeFirst(self):
-        if self.size != 0:
-            self.head = self.head.next
+      if self.size != 0:
+        self.head = self.head.next
+        if self.head is not None:
             self.head.prev = None
-            self.size -= 1
-    
+        else:
+            self.tail = None
+        self.size -= 1
+
     def removeLast(self):
-        if self.size != 0:
-            self.tail = self.tail.prev
+      if self.size != 0:
+        self.tail = self.tail.prev
+        if self.tail is not None:
             self.tail.next = None
-            self.size -= 1
+        else:
+            self.head = None
+        self.size -= 1
     
     ###
     def remove(self, key, value):
@@ -67,20 +72,36 @@ class DoubleList:
     def getSize(self) -> int:
         return self.size
     
+    def getValue(self,data)-> int:
+        curr: DoubleNode = self.head
+        cont=0
+        while cont<data:
+            curr = curr.next
+            cont+=1
+        return curr.data
+    
+    def getPlace(self,data)->int:
+        curr: DoubleNode = self.head
+        cont=0
+        while curr.data!=data and curr.next!= None:
+            curr=curr.next
+            cont+=1
+        return cont
+   
     def buscar_der(self, data) -> bool:
         curr: DoubleNode = self.head
-        while curr.dato != data and curr.next != None:
+        while curr.data != data and curr.next != None:
             curr = curr.next
-        if curr.dato == data:
+        if curr.data == data:
             return True
         else:
             return False
         
     def buscar_izq(self, data) -> bool:
         curr: DoubleNode = self.tail
-        while curr.dato != data and curr.prev != None:
+        while curr.data != data and curr.prev != None:
             curr = curr.prev
-        if curr.dato == data:
+        if curr.data == data:
             return True
         else:
             return False
@@ -99,9 +120,9 @@ class DoubleList:
         left: DoubleNode = self.head
         while right != left:
             med: DoubleNode = mid(left, right)
-            if med.dato == data or  right.dato == data:
+            if med.data == data or  right.data == data:
                 return True
-            elif med.dato < data:
+            elif med.data < data:
                 left = med.next
             else:
                 right = med
@@ -112,6 +133,7 @@ class DoubleList:
         curr: DoubleNode = self.head
         s = ""
         while curr != None:
-            s += f"{curr.dato} <-> "
+            s += f"{curr.data} <-> "
             curr = curr.next
         return s[:-5]
+
