@@ -9,7 +9,12 @@ from Empleado import Empleado
 from Mensaje import Mensaje
 from Almacenamiento import Almacenamiento
 
+
+
+
+
 def mostrar_bandeja_entrada(empleado: Empleado):
+    """Esta funcionalidad se encarga de mostrar la bandeja de entrada del empleado en cuestión."""
     
     while True:
         empleado.to_string_bandeja()
@@ -26,9 +31,16 @@ def mostrar_bandeja_entrada(empleado: Empleado):
             print("Opción no válida")
             break
     
+    
+    
+    
+    
+    
 
 
 def revisar_mensajes_leidos():
+    """Esta funcionalidad se encarga de mostrar los mensajes leidos del empleado en cuestión."""
+    
     while True:
         empleado.to_string_leidos()
         op:int = int(input("Digite el número del mensaje que desea leer: "))
@@ -44,13 +56,27 @@ def revisar_mensajes_leidos():
             print("Opción no válida")
             break
         
+        
+        
+        
+        
+        
+        
+        
 def proyectar_borrador_guardado():
     #print(Borradores.top)
     ...
     
+    
+    
+    
+    
+    
+    
 def enviar_mensaje(empleado: Empleado):
     '''Envia un mensaje a un empleado.
     Recibe como parámetro el emisor del mensaje.'''
+    
     email:str = input("Ingrese el email del destinatario: ")
     destinatario: Empleado = Almacenamiento.search_by_email(email)
     titulo: str = input("Ingrese el titulo del mensaje: ")
@@ -58,6 +84,11 @@ def enviar_mensaje(empleado: Empleado):
     mensaje: Mensaje = Mensaje(destinatario.get_email(),titulo,cuerpo,empleado.get_email())
     destinatario.recibir_mensaje(mensaje)
     print("El mensaje ha sido enviado con éxito")
+    
+    
+    
+    
+    
     
     
 def registrar_nuevo_usuario():
@@ -104,6 +135,13 @@ def registrar_nuevo_usuario():
 
             writer.writerow(vec_password)
 
+
+
+
+
+
+
+
 def cambiar_contraseña():
     id = input("Ingrese el Id del empleado al que se le hara el cambio de contraseña")
     contra = input("Ingrese la nueva contraseña: ")
@@ -124,7 +162,18 @@ def cambiar_contraseña():
 
             writer.writerow(vec_password)
     
+    
+    
+    
+    
+    
+    
+    
+    
 def menu(empleado: Empleado):
+    """Este método permite mostrar el menú de opciones del sistema de mensajería pa un usuario dado.
+    Recibe como parámetro el empleado que está haciendo uso del sistema.
+    Se llama cuantas veces el usuario lo desee."""
 
     if empleado==None:
         print("El usuario no se encuentra registrado")  
@@ -180,11 +229,19 @@ def menu(empleado: Empleado):
             cambiar_contraseña()
         else:
             print("Opción no válida")
-    
+            
+        
+            
+            
+            
+            
+            
+            
+#Variables globales del main
 Empleados = Almacenamiento.get_Empleados()
 Pwd = Almacenamiento.get_Passwords()
 
-#Este código da errores
+#Este código da errores, además es mejor meterlo en una función aparte y llamarla desde aquí
 """
 with open("data.txt", "r+") as datos:
     correo = DoubleList()
@@ -225,26 +282,29 @@ with open("data.txt", "r+") as datos:
     print("Borradores:", Borradores)
     
 """
-continuar: bool = True
-while continuar:
-    print("Bienvenido al sistema de mensajería")
+
+if __name__ == "__main__":
     
-    user: str = input("Ingrese su id: ")
-    pwd: str = input("Ingrese la contraseña: ")
-    empleado = None
-    confirmacion: bool = False
-    for i in range(len(Empleados)):
-        if Empleados[i].get_id() == user:
-            if Pwd[i][1] == pwd: 
-                empleado = Empleados[i]
-                confirmacion = True
-                empleado.set_pwd(pwd)
-                empleado.set_rol(Pwd[i][2])
-                print(empleado.get_rol())
-                break
-            else:
-                print("Contraseña incorrecta")
-            
-    menu(empleado)
-    continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no): ") == "si" 
+    continuar: bool = True
+    while continuar:
+        print("Bienvenido al sistema de mensajería")
         
+        user: str = input("Ingrese su id: ")
+        pwd: str = input("Ingrese la contraseña: ")
+        empleado = None
+        confirmacion: bool = False
+        for i in range(len(Empleados)):
+            if Empleados[i].get_id() == user:
+                if Pwd[i][1] == pwd: 
+                    empleado = Empleados[i]
+                    confirmacion = True
+                    empleado.set_pwd(pwd)
+                    empleado.set_rol(Pwd[i][2])
+                    print(empleado.get_rol())
+                    break
+                else:
+                    print("Contraseña incorrecta")
+                
+        menu(empleado)
+        continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no): ") == "si" 
+            
