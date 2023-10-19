@@ -1,3 +1,4 @@
+
 class Empleado: #Se define la clase usuario
     
     id: str
@@ -60,6 +61,8 @@ class Empleado: #Se define la clase usuario
         self.pwd = pwd
     def set_rol(self, rol):
         self.rol = rol
+        
+        
     #Tostring  
     def __str__(self):
         
@@ -69,3 +72,4 @@ class Empleado: #Se define la clase usuario
                    Dirección: {self.get_dir()}
                    Teléfono: {self.get_tel()}
                    Email: {self.get_email()}"""
+                   
