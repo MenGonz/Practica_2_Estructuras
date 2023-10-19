@@ -105,7 +105,7 @@ def cambiar_contraseña():
 
             writer.writerow(vec_password)
     
-def menu(empleado: Empleado): 
+def menu(empleado: Empleado):
 
     if empleado==None:
         print("El usuario no se encuentra registrado")  
@@ -177,18 +177,11 @@ with open("password.csv") as datos:
         Pwd.append([row[0], row[1], row[2]])
 
 with open("data.txt","r+") as datos:
-    iden = DoubleList()
-<<<<<<< HEAD
-=======
-    print(iden)
->>>>>>> b2cfe1de5a0d8669f750ca798600e5dee5228f15
+    correo = DoubleList()
     for row in datos:
         sep=row.split(" ")
         id=sep[0]
-        iden.addLast(id)
-    print(iden.getValue(0))
-       
-        
+        correo.addLast(id)      
 
 
 
