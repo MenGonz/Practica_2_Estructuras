@@ -54,19 +54,25 @@ class DoubleList:
             self.head = None
         self.size -= 1
     
-    ###
-    def remove(self, key, value):
-        if self.size != 0:
-            curr: DoubleNode = self.head
-            while curr.dato.key != value and curr.next != None:
-                curr = curr.next
-            if curr.dato == key:
-                prev = curr.prev
-                next = curr.next
-                prev.next = next
-                next.prev = prev
-                curr.next = None
+    
+    def remove(self, value):
+        """Recibe un valor y remueve el nodo con ese valor de la lista"""
+        curr: DoubleNode = self.head
+        while curr.data != value and curr.next != None:
+            curr = curr.next
+        if curr.data == value:
+            if curr.prev == None:
+                self.removeFirst()
+            elif curr.next == None:
+                self.removeLast()
+            else:
+                curr.prev.next = curr.next
+                curr.next.prev = curr.prev
                 curr.prev = None
+                curr.next = None
+            self.size -= 1
+        else:
+            raise Exception("El valor no existe en la lista")
                 
     
     def getSize(self) -> int:

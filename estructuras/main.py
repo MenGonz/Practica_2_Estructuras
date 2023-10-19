@@ -8,15 +8,42 @@ from DoubleList import DoubleList
 from Empleado import Empleado
 from Mensaje import Mensaje
 from Almacenamiento import Almacenamiento
- 
+
 def mostrar_bandeja_entrada(empleado: Empleado):
-    print(empleado.to_string_bandeja())
+    
+    while True:
+        empleado.to_string_bandeja()
+        op: int = int(input("Digite el número del mensaje que desea leer: "))
+        empleado.leer_mensaje(op)
+        continuar: str = input("¿Desea leer otro mensaje? (si/no): ")
+        if continuar == "si":
+            print()
+            continue
+        elif continuar == "no":
+            print()
+            break
+        else:
+            print("Opción no válida")
+            break
+    
 
 
-def mentsaje_leido():
-    ...
 def revisar_mensajes_leidos():
-    ...
+    while True:
+        empleado.to_string_leidos()
+        op:int = int(input("Digite el número del mensaje que desea leer: "))
+        empleado.leer_mensaje_leido(op)
+        continuar: str = input("¿Desea leer otro mensaje? (si/no): ")
+        if continuar == "si":
+            print()
+            continue
+        elif continuar == "no":
+            print()
+            break
+        else:
+            print("Opción no válida")
+            break
+        
 def proyectar_borrador_guardado():
     ...
     
@@ -27,7 +54,7 @@ def enviar_mensaje(empleado: Empleado):
     destinatario: Empleado = Almacenamiento.search_by_email(email)
     titulo: str = input("Ingrese el titulo del mensaje: ")
     cuerpo: str = input("Cuerpo del mensaje: ")
-    mensaje: Mensaje = Mensaje(destinatario.get_id(),titulo,cuerpo,empleado.get_id)
+    mensaje: Mensaje = Mensaje(destinatario.get_email(),titulo,cuerpo,empleado.get_email())
     destinatario.recibir_mensaje(mensaje)
     print("El mensaje ha sido enviado con éxito")
     
@@ -114,13 +141,13 @@ def menu(empleado: Empleado):
         """)
     
          if op == "1":
-            mostrar_bandeja_entrada()
+            mostrar_bandeja_entrada(empleado)
          elif op == "2":
             revisar_mensajes_leidos()
          elif op == "3":
             proyectar_borrador_guardado()
          elif op == "4":
-            enviar_mensaje()
+            enviar_mensaje(empleado)
          else:
             print("Opción no válida")    
         
@@ -141,11 +168,11 @@ def menu(empleado: Empleado):
         if op == "1":
             mostrar_bandeja_entrada(empleado)
         elif op == "2":
-            revisar_mensajes_leidos()
+            revisar_mensajes_leidos(empleado)
         elif op == "3":
             proyectar_borrador_guardado()
         elif op == "4":
-            enviar_mensaje()
+            enviar_mensaje(empleado)
         elif op == "5":
             registrar_nuevo_usuario()
         elif op == "6":
@@ -156,7 +183,8 @@ def menu(empleado: Empleado):
 Empleados = Almacenamiento.get_Empleados()
 Pwd = Almacenamiento.get_Passwords()
 
-
+#Este código da errores
+"""
 with open("data.txt", "r+") as datos:
     correo = DoubleList()
     for row in datos:
@@ -177,16 +205,16 @@ with open("data.txt", "r+") as datos:
         identificaciones.addLast(informacion[0])
         
         mensajes_bandeja = informacion[1].split("-")
-        for mensaje in mensajes_bandeja:
-            Bandeja_Entrada.addLast(mensaje)
+        for i in mensajes_bandeja:
+            Bandeja_Entrada.addLast(i)
             
-        mensajes_leidos = informacion[2].split("-")
-        for mensaje in mensajes_leidos:
-            Mensajes_leidos.enqueue(mensaje)
+        Mensajes_leidos = informacion[2].split("-")
+        for j in Mensajes_leidos:
+            Mensajes_leidos.enqueue(j)
             
         mensajes_borradores = informacion[3].split("-")
-        for mensaje in mensajes_borradores:
-            Borradores.push(mensaje)
+        for k in mensajes_borradores:
+            Borradores.push(k)
         contador+=1
         iterador = iterador.getNext()
 
@@ -194,8 +222,8 @@ with open("data.txt", "r+") as datos:
     print("Bandeja de Entrada:", Bandeja_Entrada)
     print("Mensajes Leídos:", Mensajes_leidos)
     print("Borradores:", Borradores)
-
-
+    
+"""
 continuar: bool = True
 while continuar:
     print("Bienvenido al sistema de mensajería")

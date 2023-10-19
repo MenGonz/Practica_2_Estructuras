@@ -1,5 +1,6 @@
 from DoubleList import DoubleList
 from Mensaje import Mensaje
+from Queue import Queue
 class Empleado: #Se define la clase usuario
     
     id: str
@@ -13,8 +14,9 @@ class Empleado: #Se define la clase usuario
     pwd: str
     bandeja_entrada: DoubleList
     mensajes_leidos: DoubleList
+    #borrador = Mensaje
     
-    def __init__(self,nombre,id,fecha_nac=None,ciudad_nac=None,tel=None,dir=None,email=None, rol =  None, pwd = None):
+    def __init__(self,nombre,id,fecha_nac=None,ciudad_nac=None,tel=None,email=None, dir=None, rol =  None, pwd = None):
         self.id = id
         self.nombre = nombre
         self.fecha_nac = fecha_nac
@@ -25,6 +27,7 @@ class Empleado: #Se define la clase usuario
         self.rol = rol
         self.pwd = pwd
         self.bandeja_entrada = DoubleList()
+        self.mensajes_leidos = DoubleList()
         
     #Getters
     def get_id(self):
@@ -67,17 +70,33 @@ class Empleado: #Se define la clase usuario
         self.rol = rol
         
     def recibir_mensaje(self,mensaje:Mensaje):
-        self.bandeja_entrada.addLast(Mensaje)
+        self.bandeja_entrada.addLast(mensaje)
         
-    def leer_mensaje(self,titulo:str):
-        curr: Mensaje = self.bandeja_entrada.head
-        for i in range(self.bandeja_entrada.size()):
-            if curr.titulo == titulo:
-                self.mensajes_leidos.addLast()
-                print(Mensaje)
-                break
+    def leer_mensaje(self,id_mensaje:int):
+        """Éste método recibe como parámetro el id del mensaje que se desea leer y lo imprime."""
+        curr = self.bandeja_entrada.head
+        
+        if self.bandeja_entrada.getSize() == 0:
+            print("El número ingresado es incorrecto.")
         else:
-            raise Exception("El correo con el título requerido no existe")
+            for i in range(id_mensaje):
+                curr = curr.next
+            self.mensajes_leidos.addLast(curr.getData())
+            print(curr.getData())
+            self.bandeja_entrada.remove(curr.getData())
+        
+    def leer_mensaje_leido(self,id_mensaje:int):
+        """Éste método recibe como parámetro el id del mensaje que se desea leer y lo imprime."""
+        curr = self.mensajes_leidos.tail
+        
+        if self.mensajes_leidos.getSize() == 0:
+            print("El número ingresado es incorrecto.")
+        else:
+            for i in range(id_mensaje):
+                curr = curr.prev
+            print(curr.getData())
+        
+    
             
         
     #Tostring  
@@ -90,11 +109,27 @@ class Empleado: #Se define la clase usuario
                    Teléfono: {self.get_tel()}
                    Email: {self.get_email()}"""
                    
-                   
+    
     def to_string_bandeja(self):
-        s: str = ""
-        curr: Mensaje = self.bandeja_entrada.head
-        for i in range(self.bandeja_entrada.size()):
-            s += f"{i}. Emisor: {curr.cedula_emisor}\nTítulo: {curr.titulo}\n"
+        """Éste método muestra los mensajes que tiene el empleado en su bandeja de entrada."""
+        
+        s: str = "Bandeja de entrada:\n"
+        curr = self.bandeja_entrada.head
+        for i in range(self.bandeja_entrada.getSize()):
+            s += f"{i}. Emisor: {curr.getData().correo_emisor}\nTítulo: {curr.getData().titulo}\n"
             curr = curr.next
-        return s[:-1]
+        print(s[:-1])
+    
+    def to_string_leidos(self):
+        """Éste método muestra los mensajes leidos que tiene el empleado."""
+        
+        s: str = "Mensajes leídos:\n"
+        curr = self.mensajes_leidos.tail
+        for i in range(self.mensajes_leidos.getSize()):
+            s += f"{i}. Emisor: {curr.getData().correo_emisor}\nTítulo: {curr.getData().titulo}\n"
+            curr = curr.prev
+        print(s[:-1])
+        
+if __name__ == "__main__":
+    for i in range(1):
+        print("hola")

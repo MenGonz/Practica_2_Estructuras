@@ -10,9 +10,10 @@ class Almacenamiento:
     def search_by_email(email:str) -> Empleado:
         '''Busca un empleado por su email y lo retorna, si no lo encuentra lanza una excepcion'''
         for emp in Almacenamiento.Empleados:
-            if emp.email == email:
+            if emp.get_email() == email:
                 return emp
-        raise Exception("Email incorrecto")
+        else:
+            raise Exception("Email incorrecto")
 
 
     @staticmethod
