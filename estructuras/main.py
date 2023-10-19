@@ -20,7 +20,7 @@ empleado = None
 confirmacion = False
 for i in range(len(Empleados)):
     if Empleados[i].get_id() == user:
-        if Pwd[i][1] == pwd:
+        if Pwd[i][1] == pwd: 
             empleado = Empleados[i]
             confirmacion = True
             empleado.set_pwd(pwd)
