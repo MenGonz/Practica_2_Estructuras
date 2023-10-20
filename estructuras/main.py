@@ -8,31 +8,92 @@ from DoubleList import DoubleList
 from Empleado import Empleado
 from Mensaje import Mensaje
 from Almacenamiento import Almacenamiento
- 
+
+
+
+
+
 def mostrar_bandeja_entrada(empleado: Empleado):
-    print(empleado.to_string_bandeja())
+    """Esta funcionalidad se encarga de mostrar la bandeja de entrada del empleado en cuestión."""
+    
+    while True:
+        empleado.to_string_bandeja()
+        op: int = int(input("Digite el número del mensaje que desea leer: "))
+        empleado.leer_mensaje(op)
+        continuar: str = input("¿Desea leer otro mensaje? (si/no): ")
+        if continuar == "si":
+            print()
+            continue
+        elif continuar == "no":
+            print()
+            break
+        else:
+            print("Opción no válida")
+            break
+    
+    
+    
+    
+    
+    
 
 
-def mentsaje_leido():
-    ...
 def revisar_mensajes_leidos():
-    ...
+    """Esta funcionalidad se encarga de mostrar los mensajes leidos del empleado en cuestión."""
+    
+    while True:
+        empleado.to_string_leidos()
+        op:int = int(input("Digite el número del mensaje que desea leer: "))
+        empleado.leer_mensaje_leido(op)
+        continuar: str = input("¿Desea leer otro mensaje? (si/no): ")
+        if continuar == "si":
+            print()
+            continue
+        elif continuar == "no":
+            print()
+            break
+        else:
+            print("Opción no válida")
+            break
+        
+        
+        
+        
+        
+        
+        
+        
 def proyectar_borrador_guardado():
+    #print(Borradores.top)
     ...
+    
+    
+    
+    
+    
+    
     
 def enviar_mensaje(empleado: Empleado):
     '''Envia un mensaje a un empleado.
     Recibe como parámetro el emisor del mensaje.'''
+    
     email:str = input("Ingrese el email del destinatario: ")
     destinatario: Empleado = Almacenamiento.search_by_email(email)
     titulo: str = input("Ingrese el titulo del mensaje: ")
     cuerpo: str = input("Cuerpo del mensaje: ")
-    mensaje: Mensaje = Mensaje(destinatario.get_id(),titulo,cuerpo,empleado.get_id)
+    mensaje: Mensaje = Mensaje(destinatario.get_email(),titulo,cuerpo,empleado.get_email())
     destinatario.recibir_mensaje(mensaje)
     print("El mensaje ha sido enviado con éxito")
     
     
+    
+    
+    
+    
+    
 def registrar_nuevo_usuario():
+    """Esta funcionalidad se encarga de registrar un nuevo usuario en el sistema."""
+    
     #Obtiene la informacion
     nombre = input("Ingrese el nombre del usuario: ")
     id = input("Ingrese el id del usuario: ")
@@ -42,61 +103,45 @@ def registrar_nuevo_usuario():
     tel = input("Ingrese el teléfono del usuario: ")
     email = input("Ingrese el email del usuario: ")
     pwd = input("Ingrese la contraseña del usuario: ")
-    rol = input("Ingrese el rol del usuario")
-    #Genera el empleado
-    nuevo_empleado = Empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
-    Empleados.append(nuevo_empleado)
-    #listas para añadir a los archivos de texto
-    vec_empleados = [Empleados[0].get_nombre(), Empleados[0].get_id(), Empleados[0].get_fecha_nac(),
-                     Empleados[0].get_ciudad_nac(), Empleados[0].get_tel(), Empleados[0].get_email(), Empleados[0].get_dir()]
-    vec_password = [Empleados[0].get_id(), Empleados[0].get_pwd(), Empleados[0].get_rol()]
-    #añade en ambos archivos en la primera posicion
-    with open('empleados.csv', 'w', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
-
-        writer.writerow(vec_empleados)
+    rol = input("Ingrese el rol del usuario: ")
     
-    with open('password.csv', 'w', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
+    
+    Almacenamiento.crear_empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
+   
 
-        writer.writerow(vec_password)
-    #Añade el resto de posiciones
-    for i in range(1, len(Empleados)):
-        vec_empleados = [Empleados[i].get_nombre(), Empleados[i].get_id(), Empleados[i].get_fecha_nac(),
-                        Empleados[i].get_ciudad_nac(), Empleados[i].get_tel(), Empleados[i].get_email(), Empleados[i].get_dir()]
-        vec_password = [Empleados[i].get_id(), Empleados[i].get_pwd(), Empleados[i].get_rol()]
-        #añade en ambos archivos en la primera posicion
-        with open('empleados.csv', 'a', encoding='UTF8', newline='') as f:
-            writer = csv.writer(f)
 
-            writer.writerow(vec_empleados)
-        
-        with open('password.csv', 'a', encoding='UTF8', newline='') as f:
-            writer = csv.writer(f)
 
-            writer.writerow(vec_password)
+
+
+
+
 
 def cambiar_contraseña():
+    """Esta funcionalidad se encarga de cambiar la contraseña de un usuario."""
+    
+    #Obtenemos la información
     id = input("Ingrese el Id del empleado al que se le hara el cambio de contraseña")
     contra = input("Ingrese la nueva contraseña: ")
-    for i in range(len(Empleados)):
-        if Empleados[i].get_id() == id:
-            Pwd[i][1] = contra
-            break
-    vec_password = [Pwd[0][0], Pwd[0][1], Pwd[0][2]]
-    with open('password.csv', 'w', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
-
-        writer.writerow(vec_password)
-    for i in range(1, len(Empleados)):
-        vec_password = [Pwd[i][0], Pwd[i][1], Pwd[i][2]]
-        #añade en ambos archivos en la primera posicion  
-        with open('password.csv', 'a', encoding='UTF8', newline='') as f:
-            writer = csv.writer(f)
-
-            writer.writerow(vec_password)
+    
+    
+    """
+    Es mejor dejar que la clase Almacenamiento se encargue de todo lo relacionado con el csv
+    por cuestiones de organización y mantenibilidad.
+    Por ese motivo se llama al método cambiar_contraseña de la clase Almacenamiento
+    """
+    Almacenamiento.cambiar_contraseña(id, contra)    
+    
+    
+    
+    
+    
+    
+    
     
 def menu(empleado: Empleado):
+    """Este método permite mostrar el menú de opciones del sistema de mensajería pa un usuario dado.
+    Recibe como parámetro el empleado que está haciendo uso del sistema.
+    Se llama cuantas veces el usuario lo desee."""
 
     if empleado==None:
         print("El usuario no se encuentra registrado")  
@@ -114,13 +159,13 @@ def menu(empleado: Empleado):
         """)
     
          if op == "1":
-            mostrar_bandeja_entrada()
+            mostrar_bandeja_entrada(empleado)
          elif op == "2":
             revisar_mensajes_leidos()
          elif op == "3":
             proyectar_borrador_guardado()
          elif op == "4":
-            enviar_mensaje()
+            enviar_mensaje(empleado)
          else:
             print("Opción no válida")    
         
@@ -141,22 +186,36 @@ def menu(empleado: Empleado):
         if op == "1":
             mostrar_bandeja_entrada(empleado)
         elif op == "2":
-            revisar_mensajes_leidos()
+            revisar_mensajes_leidos(empleado)
         elif op == "3":
             proyectar_borrador_guardado()
         elif op == "4":
-            enviar_mensaje()
+            enviar_mensaje(empleado)
         elif op == "5":
             registrar_nuevo_usuario()
         elif op == "6":
             cambiar_contraseña()
         else:
             print("Opción no válida")
-    
+            
+        
+            
+            
+            
+            
+            
+            
+#Variables globales del main
 Empleados = Almacenamiento.get_Empleados()
 Pwd = Almacenamiento.get_Passwords()
 
 
+
+
+
+#Este código da errores, además es mejor meterlo en un método en Almacenamiento y llamarlo desde aquí
+#Para ejemplo, revísese la funcionalidad de registrar_nuevo_usuario
+"""
 with open("data.txt", "r+") as datos:
     correo = DoubleList()
     for row in datos:
@@ -177,16 +236,16 @@ with open("data.txt", "r+") as datos:
         identificaciones.addLast(informacion[0])
         
         mensajes_bandeja = informacion[1].split("-")
-        for mensaje in mensajes_bandeja:
-            Bandeja_Entrada.addLast(mensaje)
+        for i in mensajes_bandeja:
+            Bandeja_Entrada.addLast(i)
             
-        mensajes_leidos = informacion[2].split("-")
-        for mensaje in mensajes_leidos:
-            Mensajes_leidos.enqueue(mensaje)
+        Mensajes_leidos = informacion[2].split("-")
+        for j in Mensajes_leidos:
+            Mensajes_leidos.enqueue(j)
             
         mensajes_borradores = informacion[3].split("-")
-        for mensaje in mensajes_borradores:
-            Borradores.push(mensaje)
+        for k in mensajes_borradores:
+            Borradores.push(k)
         contador+=1
         iterador = iterador.getNext()
 
@@ -194,28 +253,35 @@ with open("data.txt", "r+") as datos:
     print("Bandeja de Entrada:", Bandeja_Entrada)
     print("Mensajes Leídos:", Mensajes_leidos)
     print("Borradores:", Borradores)
-
-
-continuar: bool = True
-while continuar:
-    print("Bienvenido al sistema de mensajería")
     
-    user: str = input("Ingrese su id: ")
-    pwd: str = input("Ingrese la contraseña: ")
-    empleado = None
-    confirmacion: bool = False
-    for i in range(len(Empleados)):
-        if Empleados[i].get_id() == user:
-            if Pwd[i][1] == pwd: 
-                empleado = Empleados[i]
-                confirmacion = True
-                empleado.set_pwd(pwd)
-                empleado.set_rol(Pwd[i][2])
-                print(empleado.get_rol())
-                break
-            else:
-                print("Contraseña incorrecta")
-            
-    menu(empleado)
-    continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no): ") == "si" 
+"""#<<<------Este código daba errores, por eso lo comenté
+#Además es mejor meterlo en un Método en Almacenamiento y llamarlo desde aquí,
+#tal como hemos hecho con la funcionalidad de registrar_nuevo_usuario.
+
+
+
+if __name__ == "__main__":
+    
+    continuar: bool = True
+    while continuar:
+        print("Bienvenido al sistema de mensajería")
         
+        user: str = input("Ingrese su id: ")
+        pwd: str = input("Ingrese la contraseña: ")
+        empleado = None
+        confirmacion: bool = False
+        for i in range(len(Empleados)):
+            if Empleados[i].get_id() == user:
+                if Pwd[i][1] == pwd: 
+                    empleado = Empleados[i]
+                    confirmacion = True
+                    empleado.set_pwd(pwd)
+                    empleado.set_rol(Pwd[i][2])
+                    print(empleado.get_rol())
+                    break
+                else:
+                    print("Contraseña incorrecta")
+                
+        menu(empleado)
+        continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no): ") == "si" 
+            

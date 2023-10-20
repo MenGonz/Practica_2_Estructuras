@@ -8,11 +8,11 @@ class DoubleList:
     tail: DoubleNode
     
     def __init__(self, datos=None):
-     self.size = 0
-     self.head = None
-     self.tail = None
-     if datos is not None:
-        self.addLast(datos)
+        self.size = 0
+        self.head = None
+        self.tail = None
+        if datos is not None:
+            self.addLast(datos)
             
     def addLast(self, datos):
         if self.size == 0:
@@ -37,36 +37,42 @@ class DoubleList:
         self.size += 1
         
     def removeFirst(self):
-      if self.size != 0:
-        self.head = self.head.next
-        if self.head is not None:
-            self.head.prev = None
-        else:
-            self.tail = None
-        self.size -= 1
+        if self.size != 0:
+            self.head = self.head.next
+            if self.head is not None:
+                self.head.prev = None
+            else:
+                self.tail = None
+            self.size -= 1
 
     def removeLast(self):
-      if self.size != 0:
-        self.tail = self.tail.prev
-        if self.tail is not None:
-            self.tail.next = None
-        else:
-            self.head = None
-        self.size -= 1
-    
-    ###
-    def remove(self, key, value):
         if self.size != 0:
-            curr: DoubleNode = self.head
-            while curr.dato.key != value and curr.next != None:
-                curr = curr.next
-            if curr.dato == key:
-                prev = curr.prev
-                next = curr.next
-                prev.next = next
-                next.prev = prev
-                curr.next = None
+            self.tail = self.tail.prev
+            if self.tail is not None:
+                self.tail.next = None
+            else:
+                self.head = None
+            self.size -= 1
+    
+    
+    def remove(self, value):
+        """Recibe un valor y remueve el nodo con ese valor de la lista"""
+        curr: DoubleNode = self.head
+        while curr.data != value and curr.next != None:
+            curr = curr.next
+        if curr.data == value:
+            if curr.prev == None:
+                self.removeFirst()
+            elif curr.next == None:
+                self.removeLast()
+            else:
+                curr.prev.next = curr.next
+                curr.next.prev = curr.prev
                 curr.prev = None
+                curr.next = None
+            self.size -= 1
+        else:
+            raise Exception(f"El valor {value} no existe en la lista")
                 
     
     def getSize(self) -> int:
@@ -88,19 +94,10 @@ class DoubleList:
             cont+=1
         return cont
    
-    def buscar_der(self, data) -> bool:
+    def buscar(self, data) -> bool:
         curr: DoubleNode = self.head
         while curr.data != data and curr.next != None:
             curr = curr.next
-        if curr.data == data:
-            return True
-        else:
-            return False
-        
-    def buscar_izq(self, data) -> bool:
-        curr: DoubleNode = self.tail
-        while curr.data != data and curr.prev != None:
-            curr = curr.prev
         if curr.data == data:
             return True
         else:
