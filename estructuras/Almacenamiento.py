@@ -22,7 +22,14 @@ class Almacenamiento:
 
     @staticmethod
     def search_by_id(cedula:str) -> Empleado:
-        ...
+        """Busca a un empleado por su cedula y lo retorna, si no lo encuentra lanza una excepcion"""
+        for emp in Almacenamiento.Empleados:
+            if emp.get_id() == cedula:
+                return emp
+                break
+        else:
+            raise Exception("Email incorrecto")
+                
         
         
         
