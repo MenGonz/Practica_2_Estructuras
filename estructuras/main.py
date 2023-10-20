@@ -210,7 +210,7 @@ def menu(empleado: Empleado):
 Empleados = Almacenamiento.get_Empleados()
 Pwd = Almacenamiento.get_Passwords()
 
-
+#print(Pwd)
 
 
 
