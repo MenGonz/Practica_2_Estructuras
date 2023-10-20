@@ -110,6 +110,32 @@ class Almacenamiento:
                 writer = csv.writer(f)
 
                 writer.writerow(vec_password)
+       
+    @staticmethod 
+    def borrar_borrador_BD(emisor:Empleado):
+        """Este método recibe un emisor y borra de la BD 
+        el último borrador guardado de la pila de borradores."""
+        ...
+        
+    @staticmethod
+    def agregar_mensaje_BD(destinatario,mensaje):
+        """Este método recibe un destinatario y un mensaje ya éste lo guarda en la
+        bandeja de entrada (BD) del destinatario."""
+        ...
+        
+    @staticmethod
+    def agregar_borrador_BD(emisor,mensaje):
+        """Este método recibe un emisor y un mensaje. Éste mensaje se guarda en
+        la pila de borradores (BD) del emisor."""
+        ...
+        
+    @staticmethod
+    def actualizar_bandeja_BD(empleado):
+        """Este método recibe un empleado y actualiza su bandeja de entrada (BD)
+        en base al atributo bandeja de entrada del empleado en cuestión."""
+        ...
+        
+        
         
     def get_Empleados():
         return Almacenamiento.Empleados

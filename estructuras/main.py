@@ -21,6 +21,7 @@ def mostrar_bandeja_entrada(empleado: Empleado):
         empleado.to_string_bandeja()
         op: int = int(input("Digite el número del mensaje que desea leer: "))
         empleado.leer_mensaje(op)
+        Almacenamiento.actualizar_bandeja_BD(empleado)
         continuar: str = input("¿Desea leer otro mensaje? (si/no): ")
         if continuar == "si":
             print()
@@ -64,9 +65,28 @@ def revisar_mensajes_leidos():
         
         
         
-def proyectar_borrador_guardado():
-    #print(Borradores.top)
-    ...
+def sacar_borrador_guardado(empleado:Empleado):
+    """Esta funcionalidad se encarga de mostrar los borradores guardados del empleado en cuestión."""
+    borr: Mensaje = empleado.get_borrador()
+    print("El borrador guardado es:\n ")
+    print(borr,"\n")
+    op:str = input("""Seleccione la acción que desea realizar:\n
+                   1. Enviar mensaje
+                   2. Descartar mensaje
+                   """)
+    if op == '1':
+        emisor: Empleado = Almacenamiento.search_by_email(borr.get_correo_emisor())
+        destinatario: Empleado = Almacenamiento.search_by_email(borr.get_correo_receptor())
+        destinatario.recibir_mensaje(borr)
+        Almacenamiento.agregar_mensaje_BD(destinatario,borr)
+        
+        print("Su mensaje ha sido enviado con éxito")
+    elif op == '2':
+        Almacenamiento.borrar_borrador_BD(emisor)
+        print("Mensaje descartado")
+    else:
+        print("Opción no válida")
+        
     
     
     
@@ -83,7 +103,25 @@ def enviar_mensaje(empleado: Empleado):
     titulo: str = input("Ingrese el titulo del mensaje: ")
     cuerpo: str = input("Cuerpo del mensaje: ")
     mensaje: Mensaje = Mensaje(destinatario.get_email(),titulo,cuerpo,empleado.get_email(),f"{now.day}/{now.month}/{now.year}",f"{now.hour}:{now.minute}")
-    destinatario.recibir_mensaje(mensaje)
+    
+    op: str = input("""Presione el número de la acción que desea realizar:
+                    1. Enviar mensaje
+                    2. Guardar como borrador
+                    3. Descartar mensaje
+                    """)
+    if op == '1':
+        Almacenamiento.agregar_mensaje_BD(destinatario,mensaje)
+        destinatario.recibir_mensaje(mensaje)
+    elif op == '2':
+        Almacenamiento.agregar_borrador_BD(empleado,mensaje)
+        empleado.guardar_borrador(mensaje)
+    elif op == '3':
+        mensaje = None
+        print("Mensaje descartado")
+    else:
+        print("Opción no válida")
+        
+    
     print("El mensaje ha sido enviado con éxito")
     
     
@@ -164,7 +202,7 @@ def menu(empleado: Empleado):
          elif op == "2":
             revisar_mensajes_leidos()
          elif op == "3":
-            proyectar_borrador_guardado()
+            sacar_borrador_guardado()
          elif op == "4":
             enviar_mensaje(empleado)
          else:
@@ -189,7 +227,7 @@ def menu(empleado: Empleado):
         elif op == "2":
             revisar_mensajes_leidos(empleado)
         elif op == "3":
-            proyectar_borrador_guardado()
+            sacar_borrador_guardado()
         elif op == "4":
             enviar_mensaje(empleado)
         elif op == "5":

@@ -1,6 +1,7 @@
 from DoubleList import DoubleList
 from Mensaje import Mensaje
 from Queue import Queue
+from Stack import Stack
 class Empleado: #Se define la clase usuario
     
     id: str
@@ -14,7 +15,7 @@ class Empleado: #Se define la clase usuario
     pwd: str
     bandeja_entrada: DoubleList
     mensajes_leidos: Queue
-    #borrador = Mensaje
+    borradores = Stack
     
     def __init__(self,nombre,id,fecha_nac=None,ciudad_nac=None,tel=None,email=None, dir=None, rol =  None, pwd = None):
         self.id = id
@@ -28,6 +29,7 @@ class Empleado: #Se define la clase usuario
         self.pwd = pwd
         self.bandeja_entrada = DoubleList()
         self.mensajes_leidos = Queue()
+        self.borradores = Stack()
         
     #Getters
     def get_id(self):
@@ -95,6 +97,17 @@ class Empleado: #Se define la clase usuario
             for i in range(id_mensaje):
                 curr = curr.prev
             print(curr.getData())
+            
+    def guardar_borrador(self,mensaje:Mensaje):
+        """Este método recibe como parámetro un mensaje y lo guarda en la pila de borradores."""
+        self.borradores.push(mensaje)
+        
+    def get_borrador(self)-> Mensaje:
+        """Este método muestra el último borrador guardado del empleado."""
+        if self.borradores.getSize() > 0:
+            return self.borradores.pop()
+        else:
+            print("No hay borradores guardados.")
         
     
             
