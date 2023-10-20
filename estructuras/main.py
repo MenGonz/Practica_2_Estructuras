@@ -281,7 +281,10 @@ if __name__ == "__main__":
                     break
                 else:
                     print("Contraseña incorrecta")
-                
-        menu(empleado)
+        vermenu: bool = True
+        while vermenu:
+            menu(empleado)
+            vermenu = input("Desea volver al menu? (si/no): ") == "si"
+            
         continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no): ") == "si" 
             
