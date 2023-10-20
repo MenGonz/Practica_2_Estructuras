@@ -8,10 +8,11 @@ from DoubleList import DoubleList
 from Empleado import Empleado
 from Mensaje import Mensaje
 from Almacenamiento import Almacenamiento
+from datetime import datetime
 
 
 
-
+now = datetime.now()
 
 def mostrar_bandeja_entrada(empleado: Empleado):
     """Esta funcionalidad se encarga de mostrar la bandeja de entrada del empleado en cuestión."""
@@ -81,7 +82,7 @@ def enviar_mensaje(empleado: Empleado):
     destinatario: Empleado = Almacenamiento.search_by_email(email)
     titulo: str = input("Ingrese el titulo del mensaje: ")
     cuerpo: str = input("Cuerpo del mensaje: ")
-    mensaje: Mensaje = Mensaje(destinatario.get_email(),titulo,cuerpo,empleado.get_email())
+    mensaje: Mensaje = Mensaje(destinatario.get_email(),titulo,cuerpo,empleado.get_email(),f"{now.day}/{now.month}/{now.year}",f"{now.hour}:{now.minute}")
     destinatario.recibir_mensaje(mensaje)
     print("El mensaje ha sido enviado con éxito")
     
@@ -281,10 +282,13 @@ if __name__ == "__main__":
                     break
                 else:
                     print("Contraseña incorrecta")
+                    
+                    
         vermenu: bool = True
         while vermenu:
             menu(empleado)
             vermenu = input("Desea volver al menu? (si/no): ") == "si"
+            
             
         continuar = input("¿Desea volver a hacer uso del sistema de mensajería? (si/no): ") == "si" 
             

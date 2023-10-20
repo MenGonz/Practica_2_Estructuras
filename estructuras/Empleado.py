@@ -13,7 +13,7 @@ class Empleado: #Se define la clase usuario
     rol: str
     pwd: str
     bandeja_entrada: DoubleList
-    mensajes_leidos: DoubleList
+    mensajes_leidos: Queue
     #borrador = Mensaje
     
     def __init__(self,nombre,id,fecha_nac=None,ciudad_nac=None,tel=None,email=None, dir=None, rol =  None, pwd = None):
@@ -27,7 +27,7 @@ class Empleado: #Se define la clase usuario
         self.rol = rol
         self.pwd = pwd
         self.bandeja_entrada = DoubleList()
-        self.mensajes_leidos = DoubleList()
+        self.mensajes_leidos = Queue()
         
     #Getters
     def get_id(self):
