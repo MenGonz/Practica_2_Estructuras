@@ -3,8 +3,10 @@ import csv
 
 class Almacenamiento:
     
-    Empleados: list[Empleado] = []
-    Passwords:list[str] = []
+    #Empleados: list[Empleado] = []
+    #Passwords:list[str] = []
+    Empleados = []
+    Passwords = []
       
       
       
@@ -99,10 +101,10 @@ class Almacenamiento:
         
         
         
-    def get_Empleados() -> list[Empleado]:
+    def get_Empleados():
         return Almacenamiento.Empleados
     
-    def get_Passwords() -> list[str]:
+    def get_Passwords():
         return Almacenamiento.Passwords
         
     

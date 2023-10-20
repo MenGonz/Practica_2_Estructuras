@@ -135,7 +135,8 @@ class DoubleList:
         return s[:-5]
 
 if __name__ == "__main__":
-    lista: list[int] = list(map(int, input().split()))
+    #lista: list[int] = list(map(int, input().split()))
+    lista = list(map(int, input().split()))
     l: DoubleList = DoubleList()
     for x in lista:
         l.addLast(x)
