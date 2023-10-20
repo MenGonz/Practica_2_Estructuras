@@ -38,9 +38,9 @@ class Almacenamiento:
         
         
     @staticmethod
-    def crear_empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd):
+    def crear_empleado(nombre,id,fecha_nac,ciudad_nac,tel,email,dir, rol, pwd):
          #Genera el empleado
-        nuevo_empleado = Empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
+        nuevo_empleado = Empleado(nombre,id,fecha_nac,ciudad_nac,tel,email,dir, rol, pwd)
         
         Almacenamiento.Empleados.append(nuevo_empleado)
         #listas para añadir a los archivos de texto
@@ -90,6 +90,7 @@ class Almacenamiento:
             writer.writerow(vec_password)
         for i in range(1, len(Almacenamiento.Empleados)):
             vec_password = [Almacenamiento.Passwords[i][0], Almacenamiento.Passwords[i][1], Almacenamiento.Passwords[i][2]]
+            #print(vec_password)
             #añade en ambos archivos en la primera posicion  
             with open('password.csv', 'a', encoding='UTF8', newline='') as f:
                 writer = csv.writer(f)
