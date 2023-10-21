@@ -94,6 +94,7 @@ class Almacenamiento:
             
     @staticmethod    
     def cambiar_contraseña(id, contra):
+        """Este método recibe un id y una contraseña y cambia la contraseña del empleado con ese id."""
         for i in range(len(Almacenamiento.Empleados)):
             if Almacenamiento.Empleados[i].get_id() == id:
                 Almacenamiento.Passwords[i][1] = contra

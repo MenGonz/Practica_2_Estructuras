@@ -37,6 +37,12 @@ class Mensaje:
     def get_id(self) -> int:
         return self.id
     
+    def get_fecha_envío(self) -> str:
+        return self.fecha_envío
+    
+    def get_hora_envío(self) -> str:
+        return self.hora_envío
+    
     def __str__(self) -> str:
         return f"""De: {self.correo_emisor}
                 Para: {self.correo_receptor}

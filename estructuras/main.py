@@ -162,12 +162,6 @@ def cambiar_contraseña():
     id = input("Ingrese el Id del empleado al que se le hara el cambio de contraseña")
     contra = input("Ingrese la nueva contraseña: ")
     
-    
-    """
-    Es mejor dejar que la clase Almacenamiento se encargue de todo lo relacionado con el csv
-    por cuestiones de organización y mantenibilidad.
-    Por ese motivo se llama al método cambiar_contraseña de la clase Almacenamiento
-    """
     Almacenamiento.cambiar_contraseña(id, contra)    
     
     
