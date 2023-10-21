@@ -87,7 +87,7 @@ class Almacenamiento:
         ML = open(id + "_ML.csv", "w")
         B = open(id + "_B.csv", "w")
         BA.close(), ML.close(), B.close()
-        os.chdir("\\estructuras")
+        os.chdir("../estructuras")
             
             
             
@@ -128,7 +128,7 @@ class Almacenamiento:
                 writer = csv.writer(f)
                 writer.writerow([mensaje.get_correo_receptor(), mensaje.get_titulo(), f"{mensaje.get_contenido()}",
                              mensaje.get_correo_emisor(), mensaje.get_fecha_envío(), mensaje.get_hora_envío()])
-        os.chdir("\\estructuras")
+        os.chdir("../estructuras")
                 
             
                 
@@ -144,7 +144,7 @@ class Almacenamiento:
             writer = csv.writer(f)
             writer.writerow([mensaje.get_correo_receptor(), mensaje.get_titulo(), f"{mensaje.get_contenido()}",
                              mensaje.get_correo_emisor(), mensaje.get_fecha_envío(), mensaje.get_hora_envío()])
-        os.chdir("\\estructuras")
+        os.chdir("../estructuras")
         
     @staticmethod
     def agregar_borrador_BD(emisor: Empleado,mensaje):
@@ -155,7 +155,7 @@ class Almacenamiento:
             writer = csv.writer(f)
             writer.writerow([mensaje.get_correo_receptor(), mensaje.get_titulo(), f"{mensaje.get_contenido()}",
                              mensaje.get_correo_emisor(), mensaje.get_fecha_envío(), mensaje.get_hora_envío()])
-        os.chdir("\\estructuras")
+        os.chdir("../estructuras")
         
     @staticmethod
     def actualizar_bandeja_BD(empleado: Empleado):
@@ -168,7 +168,7 @@ class Almacenamiento:
             for i in range(empleado.bandeja_entrada.getSize()):
                 writer.writerow([curr.getData().get_correo_receptor(), curr.getData().get_titulo(), f"{curr.getData().get_contenido()}", curr.getData().get_correo_emisor(), curr.getData().get_fecha_envío(), curr.getData().get_hora_envío()])
                 curr = curr.next
-        os.chdir("\\estructuras")
+        os.chdir("../estructuras")
         
         
     def get_Empleados():
