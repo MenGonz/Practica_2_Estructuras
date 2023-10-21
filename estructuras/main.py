@@ -14,6 +14,8 @@ from datetime import datetime
 
 now = datetime.now()
 
+
+#-------------------------------xd
 def mostrar_bandeja_entrada(empleado: Empleado):
     """Esta funcionalidad se encarga de mostrar la bandeja de entrada del empleado en cuestión."""
     
@@ -39,7 +41,10 @@ def mostrar_bandeja_entrada(empleado: Empleado):
     
     
 
-
+#-------------------------------xd
+#crear método leer_mensaje_leido(empleado:Empleado) que saque el 
+#que fue el primer mensaje leído de el csv, lo saque también de la queue
+#empleado.mensajes_leidos y lo imprima
 def revisar_mensajes_leidos():
     """Esta funcionalidad se encarga de mostrar los mensajes leidos del empleado en cuestión."""
     
@@ -64,7 +69,7 @@ def revisar_mensajes_leidos():
         
         
         
-        
+#--------------------------------xd
 def sacar_borrador_guardado(empleado:Empleado):
     """Esta funcionalidad se encarga de mostrar los borradores guardados del empleado en cuestión."""
     borr: Mensaje = empleado.get_borrador()
@@ -93,7 +98,7 @@ def sacar_borrador_guardado(empleado:Empleado):
     
     
     
-    
+
 def enviar_mensaje(empleado: Empleado):
     '''Envia un mensaje a un empleado.
     Recibe como parámetro el emisor del mensaje.'''
