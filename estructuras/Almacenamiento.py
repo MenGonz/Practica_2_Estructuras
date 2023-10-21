@@ -1,6 +1,7 @@
 from Empleado import Empleado
 import csv
 import os
+from Stack import Stack
 
 class Almacenamiento:
     
@@ -115,25 +116,48 @@ class Almacenamiento:
     def borrar_borrador_BD(emisor:Empleado):
         """Este método recibe un emisor y borra de la BD 
         el último borrador guardado de la pila de borradores."""
-        ...
+        os.chdir("BD_Mensajes")
+        with open(emisor.get_id() + "_B.csv", 'a', encoding='UTF8', newline='') as f:
+            s: Stack = Stack()
+            emisor.borradores.pop()
+            s.push(emisor.borradores.pop())
+            while s.getSize() > 0:
+                mensaje = s.pop()
+                writer = csv.writer(f)
+                writer.writerow([mensaje.get_correo_receptor(), mensaje.get_titulo(), f"{mensaje.get_contenido()}",
+                             mensaje.get_correo_emisor(), mensaje.get_fecha_envío(), mensaje.get_hora_envío()])
+                
+            
+                
+        
         
     @staticmethod
-    def agregar_mensaje_BD(destinatario,mensaje):
+    def agregar_mensaje_BD(destinatario:Empleado,mensaje):
         """Este método recibe un destinatario y un mensaje ya éste lo guarda en la
         bandeja de entrada (BD) del destinatario."""
         ...
         
     @staticmethod
-    def agregar_borrador_BD(emisor,mensaje):
+    def agregar_borrador_BD(emisor: Empleado,mensaje):
         """Este método recibe un emisor y un mensaje. Éste mensaje se guarda en
         la pila de borradores (BD) del emisor."""
-        ...
+        os.chdir("BD_Mensajes")
+        with open(emisor.get_id() + "_B.csv", 'a', encoding='UTF8', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow([mensaje.get_correo_receptor(), mensaje.get_titulo(), f"{mensaje.get_contenido()}",
+                             mensaje.get_correo_emisor(), mensaje.get_fecha_envío(), mensaje.get_hora_envío()])
         
     @staticmethod
-    def actualizar_bandeja_BD(empleado):
+    def actualizar_bandeja_BD(empleado: Empleado):
         """Este método recibe un empleado y actualiza su bandeja de entrada (BD)
         en base al atributo bandeja de entrada del empleado en cuestión."""
-        ...
+        os.chdir("BD_Mensajes")
+        with open(empleado.get_id()+"_BA.csv", 'w', encoding='UTF8', newline='') as f:
+            writer = csv.writer(f)
+            curr = empleado.bandeja_entrada.head
+            for i in range(empleado.bandeja_entrada.getSize()):
+                writer.writerow([curr.getData().get_correo_receptor(), curr.getData().get_titulo(), f"{curr.getData().get_contenido()}", curr.getData().get_correo_emisor(), curr.getData().get_fecha_envío(), curr.getData().get_hora_envío()])
+                curr = curr.next
         
         
         
