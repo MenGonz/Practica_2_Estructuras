@@ -20,8 +20,8 @@ class DoubleList:
             self.tail = self.head
         else:
             nod: DoubleNode = DoubleNode(datos)
-            nod.prev = self.tail
             self.tail.next = nod
+            nod.prev = self.tail
             self.tail = nod
         self.size += 1
         
@@ -31,8 +31,8 @@ class DoubleList:
             self.tail = self.head
         else:
             nod: DoubleNode = DoubleNode(datos)
-            nod.next = self.head
             self.head.prev = nod
+            nod.next = self.head
             self.head = nod
         self.size += 1
         

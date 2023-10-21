@@ -145,7 +145,7 @@ def registrar_nuevo_usuario():
     rol = input("Ingrese el rol del usuario: ")
     
     
-    Almacenamiento.crear_empleado(nombre,id,fecha_nac,ciudad_nac,tel,dir,email, rol, pwd)
+    Almacenamiento.crear_empleado(nombre,id,fecha_nac,ciudad_nac,tel,email,dir, rol, pwd)
    
 
 
@@ -162,6 +162,12 @@ def cambiar_contraseña():
     id = input("Ingrese el Id del empleado al que se le hara el cambio de contraseña")
     contra = input("Ingrese la nueva contraseña: ")
     
+    
+    """
+    Es mejor dejar que la clase Almacenamiento se encargue de todo lo relacionado con el csv
+    por cuestiones de organización y mantenibilidad.
+    Por ese motivo se llama al método cambiar_contraseña de la clase Almacenamiento
+    """
     Almacenamiento.cambiar_contraseña(id, contra)    
     
     
@@ -242,7 +248,7 @@ def menu(empleado: Empleado):
 Empleados = Almacenamiento.get_Empleados()
 Pwd = Almacenamiento.get_Passwords()
 
-#print(Pwd)
+
 
 
 
