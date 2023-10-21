@@ -140,7 +140,7 @@ class Almacenamiento:
         """Este método recibe un destinatario y un mensaje ya éste lo guarda en la
         bandeja de entrada (BD) del destinatario."""
         os.chdir("BD_Mensajes")
-        with open(destinatario.get_id() + "_BA", "a", encoding='UTF8', newline='') as f:
+        with open(destinatario.get_id() + "_BA.csv", "a", encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
             writer.writerow([mensaje.get_correo_receptor(), mensaje.get_titulo(), f"{mensaje.get_contenido()}",
                              mensaje.get_correo_emisor(), mensaje.get_fecha_envío(), mensaje.get_hora_envío()])
