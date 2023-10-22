@@ -267,7 +267,7 @@ if __name__ == "__main__":
         pwd: str = input("Ingrese la contraseña: ")
         empleado = None
         confirmacion: bool = False
-        
+        incorrecta: bool = False
 
         for i in range(len(Empleados)):
 
@@ -284,7 +284,7 @@ if __name__ == "__main__":
 
                 else:
 
-                    print("Contraseña incorrecta")
+                    incorrecta=True
                     break
                     
                     
