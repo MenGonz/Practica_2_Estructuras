@@ -71,37 +71,48 @@ class Empleado: #Se define la clase usuario
     def set_rol(self, rol):
         self.rol = rol
         
+
     def recibir_mensaje(self,mensaje:Mensaje):
         self.bandeja_entrada.addLast(mensaje)
         
+
     def leer_mensaje(self,id_mensaje:int):
         """Éste método recibe como parámetro el id del mensaje que se desea leer y lo imprime."""
         curr = self.bandeja_entrada.head
         
         if self.bandeja_entrada.getSize() == 0:
+
             print("El número ingresado es incorrecto.")
+
         else:
+
             for i in range(id_mensaje):
                 curr = curr.next
             self.mensajes_leidos.addLast(curr.getData())
             print(curr.getData())
             self.bandeja_entrada.remove(curr.getData())
         
+
     def leer_mensaje_leido(self,id_mensaje:int):
         """Éste método recibe como parámetro el id del mensaje que se desea leer y lo imprime."""
         curr = self.mensajes_leidos.tail
         
         if self.mensajes_leidos.getSize() == 0:
+
             print("El número ingresado es incorrecto.")
+
         else:
+            
             for i in range(id_mensaje):
                 curr = curr.prev
             print(curr.getData())
             
+
     def guardar_borrador(self,mensaje:Mensaje):
         """Este método recibe como parámetro un mensaje y lo guarda en la pila de borradores."""
         self.borradores.push(mensaje)
         
+
     def get_borrador(self)-> Mensaje:
         """Este método muestra el último borrador guardado del empleado."""
         if self.borradores.getSize() > 0:
@@ -110,8 +121,6 @@ class Empleado: #Se define la clase usuario
             print("No hay borradores guardados.")
         
     
-            
-        
     #Tostring  
     def __str__(self):
         
@@ -133,15 +142,19 @@ class Empleado: #Se define la clase usuario
             curr = curr.next
         print(s[:-1])
     
+
     def to_string_leidos(self):
         """Éste método muestra los mensajes leidos que tiene el empleado."""
         
         s: str = "Mensajes leídos:\n"
         curr = self.mensajes_leidos.tail
         for i in range(self.mensajes_leidos.getSize()):
+
             s += f"{i}. Emisor: {curr.getData().correo_emisor}\nTítulo: {curr.getData().titulo}\n"
             curr = curr.prev
+            
         print(s[:-1])
+        
         
 if __name__ == "__main__":
     for i in range(1):
