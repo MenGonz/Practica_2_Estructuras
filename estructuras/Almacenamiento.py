@@ -182,7 +182,7 @@ class Almacenamiento:
     @staticmethod
     def agregar_mensaje_BD(destinatario,mensaje):
 
-        """Este método recibe un destinatario y un mensaje ya éste lo guarda en la
+        """Este método recibe un destinatario y un mensaje y a éste lo guarda en la
         bandeja de entrada (BD) del destinatario."""
         os.chdir("BD_Mensajes")
 
