@@ -46,8 +46,8 @@ def revisar_mensajes_leidos():
     while True:
 
         empleado.to_string_leidos()
-        op:int = int(input("Digite el número del mensaje que desea leer: "))
-        empleado.leer_mensaje_leido(op)
+        op:int = int(input("Desea leer el primer mensaje? "))
+        print(Almacenamiento.leer_mensaje_leido(empleado))
         continuar: str = input("¿Desea leer otro mensaje? (si/no): ")
 
         if continuar == "si":

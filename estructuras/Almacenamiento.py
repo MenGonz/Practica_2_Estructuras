@@ -1,7 +1,9 @@
 from Empleado import Empleado
+from Mensaje import Mensaje
 import csv
 import os
 from Stack import Stack
+from Queue import Queue
 
 class Almacenamiento:
     
@@ -235,7 +237,24 @@ class Almacenamiento:
 
         os.chdir("..")
         
+    @staticmethod
+    def leer_mensaje_leido(empleado: Empleado):
+        os.chdir("BD_Mensajes")
+        with open(empleado.get_id() + "_ML", "w") as f:
+            temp_list = []
+            writer = csv.writer(f)
+            for row in f:
+                temp_list.append(row)
+            a = temp_list[0]
+            temp_list.pop(0)
+            for x in temp_list:
+                writer.writerow(x)
+            writer.writerow(a)
+            head = empleado.mensajes_leidos.dequeue()
+            empleado.mensajes_leidos.enqueue(head)
         
+        return head.getData()
+
     def get_Empleados():
         return Almacenamiento.Empleados
     
