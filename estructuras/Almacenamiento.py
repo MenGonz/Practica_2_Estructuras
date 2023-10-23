@@ -186,6 +186,7 @@ class Almacenamiento:
 
         """Este método recibe un destinatario y un mensaje y a éste lo guarda en la
         bandeja de entrada (BD) del destinatario."""
+        destinatario.recibir_mensaje(mensaje)
         os.chdir("BD_Mensajes")
 
         with open(destinatario.get_id() + "_BA.csv", "a", encoding='UTF8', newline='') as f:
@@ -241,9 +242,10 @@ class Almacenamiento:
     @staticmethod
     def leer_mensaje_leido(empleado: Empleado):
         os.chdir("BD_Mensajes")
-        with open(empleado.get_id() + "_ML", "w") as f:
+        with open(empleado.get_id() + "_ML.csv", "r+") as datos:
             temp_list = []
-            writer = csv.writer(f)
+            f = csv.reader(datos)
+            writer = csv.writer(datos)
             for row in f:
                 temp_list.append(row)
             a = temp_list[0]
@@ -256,30 +258,41 @@ class Almacenamiento:
         os.chdir("..")
         return head.getData()
     
-    def leer_mensaje(self,id_mensaje:int):
+    def leer_mensaje(empleado: Empleado,id_mensaje:int):
         """Éste método recibe como parámetro el id del mensaje que se desea leer y lo imprime."""
         os.chdir("BD_Mensajes")
-        with open(self.get_id() + "_BA", "w") as f:
+        with open(empleado.get_id() + "_BA.csv", "r+") as datos:
             i = 0
             r = None
             temp_list = []
-            writer = csv.writer(f)
-            for row in f:
+            lector = csv.reader(datos)
+            writer = csv.writer(datos)
+            for row in lector:
                 temp_list.append(row)
-            for row in f:
+            for row in lector:
+                print(i)
                 if i == id_mensaje:
                     r = row
                     temp_list.pop(i)
                     break
-            for row in temp_list:
-                writer.writerow(row)
-            with open(self.get_id() + "_ML", "a") as k:
+                i+=1
+            for row in range(len(temp_list)):
+                if row == 0:
+                    with open (empleado.get_id() + "_BA.csv", "w") as data:
+                        writer = csv.writer(data)
+                        writer.writerow(temp_list[row])
+                else:
+                    with open (empleado.get_id() + "_BA.csv", "a") as data:
+                        writer = csv.writer(data)
+                        writer.writerow(temp_list[row])
+                        
+            with open(empleado.get_id() + "_ML.csv", "a") as k:
                 writer2 = csv.writer(k)
                 writer2.writerow(r)
         os.chdir("..")
-        curr = self.bandeja_entrada.head
+        curr = empleado.bandeja_entrada.head
         
-        if self.bandeja_entrada.getSize() == 0:
+        if empleado.bandeja_entrada.getSize() == 0:
 
             print("La bandeja de entrada esta vacia.")
 
@@ -287,15 +300,16 @@ class Almacenamiento:
 
             for i in range(id_mensaje):
                 curr = curr.next
-            self.mensajes_leidos.addLast(curr.getData())
+            empleado.mensajes_leidos.addLast(curr.getData())
             print(curr.getData())
-            self.bandeja_entrada.remove(curr.getData())
+            empleado.bandeja_entrada.remove(curr.getData())
     
     def sacar_borrador(self: Empleado):
         os.chdir("BD_Mensajes")
-        with open(self.get_id() + "_B", "w") as f:
+        with open(self.get_id() + "_B.csv", "r+") as datos:
             temp_list = []
-            writer = csv.writer(f)
+            f = csv.reader(datos)
+            writer = csv.writer(datos)
             for row in f:
                 temp_list.append(row)
             temp_list.pop()

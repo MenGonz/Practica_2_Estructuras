@@ -15,7 +15,7 @@ def mostrar_bandeja_entrada(empleado: Empleado):
 
         empleado.to_string_bandeja()
         op: int = int(input("Digite el número del mensaje que desea leer: "))
-        empleado.leer_mensaje(op)
+        Almacenamiento.leer_mensaje(empleado, op)
         Almacenamiento.actualizar_bandeja_BD(empleado)
         continuar: str = input("¿Desea leer otro mensaje? (si/no): ")
 
