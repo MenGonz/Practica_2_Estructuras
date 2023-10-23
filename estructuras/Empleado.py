@@ -127,6 +127,7 @@ class Empleado: #Se define la clase usuario
         for i in range(self.bandeja_entrada.getSize()):
             s += f"{i}. Emisor: {curr.getData().correo_emisor}\nTítulo: {curr.getData().titulo}\n"
             curr = curr.next
+        print(self.bandeja_entrada.getSize())
         print(s[:-1])
     
 

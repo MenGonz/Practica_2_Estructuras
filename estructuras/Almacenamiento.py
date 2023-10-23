@@ -239,6 +239,10 @@ class Almacenamiento:
 
         os.chdir("..")
         
+        
+        
+        
+        
     @staticmethod
     def leer_mensaje_leido(empleado: Empleado):
         os.chdir("BD_Mensajes")
@@ -258,6 +262,9 @@ class Almacenamiento:
         os.chdir("..")
         return head.getData()
     
+    
+    
+    
     def leer_mensaje(empleado: Empleado,id_mensaje:int):
         """Éste método recibe como parámetro el id del mensaje que se desea leer y lo imprime."""
         os.chdir("BD_Mensajes")
@@ -267,24 +274,26 @@ class Almacenamiento:
             temp_list = []
             lector = csv.reader(datos)
             writer = csv.writer(datos)
+            
+            
             for row in lector:
                 temp_list.append(row)
-            for row in lector:
                 print(i)
                 if i == id_mensaje:
                     r = row
                     temp_list.pop(i)
                     break
                 i+=1
+                
             for row in range(len(temp_list)):
                 if row == 0:
                     with open (empleado.get_id() + "_BA.csv", "w") as data:
-                        writer = csv.writer(data)
-                        writer.writerow(temp_list[row])
+                        writer2 = csv.writer(data)
+                        writer2.writerow(temp_list[row])
                 else:
                     with open (empleado.get_id() + "_BA.csv", "a") as data:
-                        writer = csv.writer(data)
-                        writer.writerow(temp_list[row])
+                        writer2 = csv.writer(data)
+                        writer2.writerow(temp_list[row])
                         
             with open(empleado.get_id() + "_ML.csv", "a") as k:
                 writer2 = csv.writer(k)
@@ -303,6 +312,9 @@ class Almacenamiento:
             empleado.mensajes_leidos.addLast(curr.getData())
             print(curr.getData())
             empleado.bandeja_entrada.remove(curr.getData())
+    
+    
+    
     
     def sacar_borrador(self: Empleado):
         os.chdir("BD_Mensajes")
