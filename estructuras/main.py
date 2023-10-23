@@ -7,7 +7,7 @@ from datetime import datetime
 now = datetime.now()
 
 
-#-------------------------------xd
+#-------------------------------
 def mostrar_bandeja_entrada(empleado: Empleado):
 
     """Esta funcionalidad se encarga de mostrar la bandeja de entrada del empleado en cuestión."""
@@ -36,7 +36,7 @@ def mostrar_bandeja_entrada(empleado: Empleado):
 
 
 
-#-------------------------------xd
+#-------------------------------
 #crear método leer_mensaje_leido(empleado:Empleado) que saque el 
 #que fue el primer mensaje leído de el csv, lo saque también de la queue
 #empleado.mensajes_leidos y lo imprima
@@ -79,6 +79,7 @@ def sacar_borrador_guardado(empleado:Empleado):
                    1. Enviar mensaje
                    2. Descartar mensaje
                    """)
+    empleado.sacar_borrador()
     
     if op == '1':
         emisor: Empleado = Almacenamiento.search_by_email(borr.get_correo_emisor())

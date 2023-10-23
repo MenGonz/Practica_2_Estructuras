@@ -205,6 +205,7 @@ class Almacenamiento:
 
         """Este método recibe un emisor y un mensaje. Éste mensaje se guarda en
         la pila de borradores (BD) del emisor."""
+        emisor.borradores.push(mensaje)
         os.chdir("BD_Mensajes")
 
         with open(emisor.get_id() + "_B.csv", 'a', encoding='UTF8', newline='') as f:
@@ -275,7 +276,7 @@ class Almacenamiento:
             with open(self.get_id() + "_ML", "a") as k:
                 writer2 = csv.writer(k)
                 writer2.writerow(r)
-                    
+        os.chdir("..")
         curr = self.bandeja_entrada.head
         
         if self.bandeja_entrada.getSize() == 0:
@@ -289,6 +290,19 @@ class Almacenamiento:
             self.mensajes_leidos.addLast(curr.getData())
             print(curr.getData())
             self.bandeja_entrada.remove(curr.getData())
+    
+    def sacar_borrador(self: Empleado):
+        os.chdir("BD_Mensajes")
+        with open(self.get_id() + "_B", "w") as f:
+            temp_list = []
+            writer = csv.writer(f)
+            for row in f:
+                temp_list.append(row)
+            temp_list.pop()
+            for row in temp_list:
+                writer.writerow(row)
+        os.chdir("..")
+        
 
     def get_Empleados():
         return Almacenamiento.Empleados
