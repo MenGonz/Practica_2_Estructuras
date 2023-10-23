@@ -252,8 +252,43 @@ class Almacenamiento:
             writer.writerow(a)
             head = empleado.mensajes_leidos.dequeue()
             empleado.mensajes_leidos.enqueue(head)
-        
+        os.chdir("..")
         return head.getData()
+    
+    def leer_mensaje(self,id_mensaje:int):
+        """Éste método recibe como parámetro el id del mensaje que se desea leer y lo imprime."""
+        os.chdir("BD_Mensajes")
+        with open(self.get_id() + "_BA", "w") as f:
+            i = 0
+            r = None
+            temp_list = []
+            writer = csv.writer(f)
+            for row in f:
+                temp_list.append(row)
+            for row in f:
+                if i == id_mensaje:
+                    r = row
+                    temp_list.pop(i)
+                    break
+            for row in temp_list:
+                writer.writerow(row)
+            with open(self.get_id() + "_ML", "a") as k:
+                writer2 = csv.writer(k)
+                writer2.writerow(r)
+                    
+        curr = self.bandeja_entrada.head
+        
+        if self.bandeja_entrada.getSize() == 0:
+
+            print("La bandeja de entrada esta vacia.")
+
+        else:
+
+            for i in range(id_mensaje):
+                curr = curr.next
+            self.mensajes_leidos.addLast(curr.getData())
+            print(curr.getData())
+            self.bandeja_entrada.remove(curr.getData())
 
     def get_Empleados():
         return Almacenamiento.Empleados

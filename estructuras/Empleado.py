@@ -77,21 +77,7 @@ class Empleado: #Se define la clase usuario
         self.bandeja_entrada.addLast(mensaje)
         
 
-    def leer_mensaje(self,id_mensaje:int):
-        """Éste método recibe como parámetro el id del mensaje que se desea leer y lo imprime."""
-        curr = self.bandeja_entrada.head
-        
-        if self.bandeja_entrada.getSize() == 0:
-
-            print("El número ingresado es incorrecto.")
-
-        else:
-
-            for i in range(id_mensaje):
-                curr = curr.next
-            self.mensajes_leidos.addLast(curr.getData())
-            print(curr.getData())
-            self.bandeja_entrada.remove(curr.getData())
+    
         
 
     def leer_mensaje_leido(self,id_mensaje:int):
