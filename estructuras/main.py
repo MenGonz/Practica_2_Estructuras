@@ -40,13 +40,13 @@ def mostrar_bandeja_entrada(empleado: Empleado):
 #crear método leer_mensaje_leido(empleado:Empleado) que saque el 
 #que fue el primer mensaje leído de el csv, lo saque también de la queue
 #empleado.mensajes_leidos y lo imprima
-def revisar_mensajes_leidos():
+def revisar_mensajes_leidos(empleado: Empleado):
 
     """Esta funcionalidad se encarga de mostrar los mensajes leidos del empleado en cuestión.""" 
     while True:
 
         empleado.to_string_leidos()
-        op:int = int(input("Desea leer el primer mensaje? "))
+        op:str = input("Desea leer el primer mensaje? (si/no):")
         print(Almacenamiento.leer_mensaje_leido(empleado))
         continuar: str = input("¿Desea leer otro mensaje? (si/no): ")
 
@@ -79,22 +79,23 @@ def sacar_borrador_guardado(empleado:Empleado):
                    1. Enviar mensaje
                    2. Descartar mensaje
                    """)
-    empleado.sacar_borrador()
+    
     
     if op == '1':
-        emisor: Empleado = Almacenamiento.search_by_email(borr.get_correo_emisor())
+        emisor: Empleado = empleado
         destinatario: Empleado = Almacenamiento.search_by_email(borr.get_correo_receptor())
         destinatario.recibir_mensaje(borr)
         Almacenamiento.agregar_mensaje_BD(destinatario,borr)
         print("Su mensaje ha sido enviado con éxito")
         
     elif op == '2':
-        Almacenamiento.borrar_borrador_BD(emisor)
+        emisor: Empleado = empleado
+        
         print("Mensaje descartado")
 
     else:
         print("Opción no válida")
-        
+    Almacenamiento.sacar_borrador(emisor)    
 
 
 
@@ -235,7 +236,7 @@ def menu(empleado: Empleado):
         elif op == "2":
             revisar_mensajes_leidos(empleado)
         elif op == "3":
-            sacar_borrador_guardado()
+            sacar_borrador_guardado(empleado)
         elif op == "4":
             enviar_mensaje(empleado)
         elif op == "5":
@@ -275,8 +276,9 @@ if __name__ == "__main__":
             if Empleados[i].get_id() == user:
 
                 if Pwd[i][1] == pwd: 
-
                     empleado = Empleados[i]
+                    
+                    Almacenamiento.inicializar_datos(empleado)
                     confirmacion = True
                     empleado.set_pwd(pwd)
                     empleado.set_rol(Pwd[i][2])

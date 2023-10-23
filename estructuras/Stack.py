@@ -9,7 +9,7 @@ class Stack(List):
         
     def pop(self):
         if self.size != 0:
-            ret = self.cola.dato
+            ret = self.tail.getData()
             self.removeLast()
             return ret
         else:
@@ -17,6 +17,6 @@ class Stack(List):
         
     def top(self):
         if self.size != 0: 
-            return self.cola.dato
+            return self.tail.getData()
         else:
             return None

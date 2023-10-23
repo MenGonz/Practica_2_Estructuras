@@ -135,11 +135,17 @@ class Empleado: #Se define la clase usuario
         """Éste método muestra los mensajes leidos que tiene el empleado."""
         
         s: str = "Mensajes leídos:\n"
-        curr = self.mensajes_leidos.tail
+        curr = self.mensajes_leidos.head
+        stack: Stack = Stack()
+        
         for i in range(self.mensajes_leidos.getSize()):
-
+            stack.push(curr)
+            curr = curr.next
+            
+        for i in range(self.mensajes_leidos.getSize()):
+            curr = stack.pop()
             s += f"{i}. Emisor: {curr.getData().correo_emisor}\nTítulo: {curr.getData().titulo}\n"
-            curr = curr.prev
+            
             
         print(s[:-1])
         

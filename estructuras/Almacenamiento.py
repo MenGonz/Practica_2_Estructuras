@@ -156,27 +156,27 @@ class Almacenamiento:
 
 
 
+    """ 
     @staticmethod 
     def borrar_borrador_BD(emisor:Empleado):
 
-        """Este método recibe un emisor y borra de la BD 
-        el último borrador guardado de la pila de borradores."""
+        #Este método recibe un emisor y borra de la BD 
+        #el último borrador guardado de la pila de borradores.
         os.chdir("BD_Mensajes")
 
         with open(emisor.get_id() + "_B.csv", 'a', encoding='UTF8', newline='') as f:
 
-            s: Stack = Stack()
-            emisor.borradores.pop()
-            s.push(emisor.borradores.pop())
-
-            while s.getSize() > 0:
-                mensaje = s.pop()
-                writer = csv.writer(f)
-                writer.writerow([mensaje.get_correo_receptor(), mensaje.get_titulo(), f"{mensaje.get_contenido()}",
-                             mensaje.get_correo_emisor(), mensaje.get_fecha_envío(), mensaje.get_hora_envío()])
+            #emisor.borradores.pop()
+            s = emisor.borradores.pop()
+            
+            
+            mensaje = s.pop()
+            writer = csv.writer(f)
+            writer.writerow([mensaje.get_correo_receptor(), mensaje.get_titulo(), f"{mensaje.get_contenido()}",
+                            mensaje.get_correo_emisor(), mensaje.get_fecha_envío(), mensaje.get_hora_envío()])
        
         os.chdir("..")
-                
+                """
             
                 
         
@@ -246,7 +246,7 @@ class Almacenamiento:
     @staticmethod
     def leer_mensaje_leido(empleado: Empleado):
         os.chdir("BD_Mensajes")
-        with open(empleado.get_id() + "_ML.csv", "r+") as datos:
+        with open(empleado.get_id() + "_ML.csv", "r+", newline = "") as datos:
             temp_list = []
             f = csv.reader(datos)
             writer = csv.writer(datos)
@@ -254,13 +254,20 @@ class Almacenamiento:
                 temp_list.append(row)
             a = temp_list[0]
             temp_list.pop(0)
-            for x in temp_list:
-                writer.writerow(x)
+            for row in range(len(temp_list)):
+                if row == 0:
+                    with open (empleado.get_id() + "_ML.csv", "w", newline = "") as data:
+                        writer2 = csv.writer(data)
+                        writer2.writerow(temp_list[row])
+                else:
+                    with open (empleado.get_id() + "_ML.csv", "a", newline = "") as data:
+                        writer2 = csv.writer(data) 
+                        writer2.writerow(temp_list[row])
             writer.writerow(a)
             head = empleado.mensajes_leidos.dequeue()
             empleado.mensajes_leidos.enqueue(head)
         os.chdir("..")
-        return head.getData()
+        return head
     
     
     
@@ -268,7 +275,7 @@ class Almacenamiento:
     def leer_mensaje(empleado: Empleado,id_mensaje:int):
         """Éste método recibe como parámetro el id del mensaje que se desea leer y lo imprime."""
         os.chdir("BD_Mensajes")
-        with open(empleado.get_id() + "_BA.csv", "r+") as datos:
+        with open(empleado.get_id() + "_BA.csv", "r+", newline = "") as datos:
             i = 0
             r = None
             temp_list = []
@@ -287,15 +294,15 @@ class Almacenamiento:
                 
             for row in range(len(temp_list)):
                 if row == 0:
-                    with open (empleado.get_id() + "_BA.csv", "w") as data:
+                    with open (empleado.get_id() + "_BA.csv", "w", newline = "") as data:
                         writer2 = csv.writer(data)
                         writer2.writerow(temp_list[row])
                 else:
-                    with open (empleado.get_id() + "_BA.csv", "a") as data:
+                    with open (empleado.get_id() + "_BA.csv", "a", newline = "") as data:
                         writer2 = csv.writer(data)
                         writer2.writerow(temp_list[row])
                         
-            with open(empleado.get_id() + "_ML.csv", "a") as k:
+            with open(empleado.get_id() + "_ML.csv", "a", newline = "") as k:
                 writer2 = csv.writer(k)
                 writer2.writerow(r)
         os.chdir("..")
@@ -316,19 +323,59 @@ class Almacenamiento:
     
     
     
-    def sacar_borrador(self: Empleado):
+    def sacar_borrador(empleado: Empleado):
         os.chdir("BD_Mensajes")
-        with open(self.get_id() + "_B.csv", "r+") as datos:
+        empleado.borradores.pop()
+        with open(empleado.get_id() + "_B.csv", "r+", newline = "") as datos:
             temp_list = []
             f = csv.reader(datos)
             writer = csv.writer(datos)
             for row in f:
                 temp_list.append(row)
             temp_list.pop()
-            for row in temp_list:
-                writer.writerow(row)
+            if len(temp_list) == 0:
+                    with open (empleado.get_id() + "_B.csv", "w", newline = "") as data:
+                        writer = csv.writer(data)
+                        writer.writerow([])
+            else:
+                for row in range(len(temp_list)):
+                    
+                    if row == 0:
+                        with open (empleado.get_id() + "_B.csv", "w", newline = "") as data:
+                            writer = csv.writer(data)
+                            writer.writerow(temp_list[row])
+                    else:
+                        with open (empleado.get_id() + "_B.csv", "a", newline = "") as data:
+                            writer = csv.writer(data)
+                            writer.writerow(temp_list[row])
         os.chdir("..")
         
+        
+        
+        
+        
+    @staticmethod
+    def inicializar_datos(empleado: Empleado):
+        os.chdir("BD_Mensajes")
+        with open(empleado.get_id() + "_BA.csv", "r", newline = "") as datos:
+            lector = csv.reader(datos)
+            for row in lector:
+                mensaje = Mensaje(row[0], row[1], row[2], row[3], row[4], row[5])
+                empleado.bandeja_entrada.addLast(mensaje)
+                
+        with open(empleado.get_id() + "_ML.csv","r", newline = "") as datos:
+            lector = csv.reader(datos)
+            for row in lector:
+                
+                mensaje = Mensaje(row[0], row[1], row[2], row[3], row[4], row[5])
+                empleado.mensajes_leidos.enqueue(mensaje)
+                
+        with open(empleado.get_id() + "_B.csv", "r", newline = "") as datos:
+            lector = csv.reader(datos)
+            for row in lector:
+                mensaje = Mensaje(row[0], row[1], row[2], row[3], row[4], row[5])
+                empleado.borradores.push(mensaje)
+        os.chdir("..")
 
     def get_Empleados():
         return Almacenamiento.Empleados
