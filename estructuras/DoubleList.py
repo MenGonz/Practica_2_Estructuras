@@ -2,7 +2,7 @@
 from DoubleNode import DoubleNode
 
 class DoubleList:
-    
+     
     size: int
     head: DoubleNode
     tail: DoubleNode
