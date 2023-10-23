@@ -16,7 +16,6 @@ def mostrar_bandeja_entrada(empleado: Empleado):
         empleado.to_string_bandeja()
         op: int = int(input("Digite el número del mensaje que desea leer: "))
         Almacenamiento.leer_mensaje(empleado, op)
-        Almacenamiento.actualizar_bandeja_BD(empleado)
         continuar: str = input("¿Desea leer otro mensaje? (si/no): ")
 
         if continuar == "si":
@@ -209,9 +208,9 @@ def menu(empleado: Empleado):
          if op == "1":
             mostrar_bandeja_entrada(empleado)
          elif op == "2":
-            revisar_mensajes_leidos()
+            revisar_mensajes_leidos(empleado)
          elif op == "3":
-            sacar_borrador_guardado()
+            sacar_borrador_guardado(empleado)
          elif op == "4":
             enviar_mensaje(empleado)
          else:
