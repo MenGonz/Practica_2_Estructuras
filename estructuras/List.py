@@ -42,7 +42,7 @@ class List:
     def removeLast(self):
         if self.size != 0:
             curr: Node = self.head
-            while curr.next != self.tail:
+            while curr.next != self.tail and curr.next != None:
                 curr = curr.next
             curr.next = None
             self.tail = curr

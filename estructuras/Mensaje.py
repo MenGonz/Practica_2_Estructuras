@@ -8,11 +8,12 @@ class Mensaje:
     fecha_envío: str
     hora_envío: str
     
-    def __init__(self, cedula_receptor: str, titulo: str, contenido: str, cedula_emisor: str,fecha_envío:str =None,hora_envío:str =None):
-        self.correo_receptor = cedula_receptor
+    def __init__(self, correo_receptor: str, titulo: str, contenido: str,
+                 correo_emisor: str,fecha_envío:str =None,hora_envío:str =None):
+        self.correo_receptor = correo_receptor
         self.titulo = titulo
         self.contenido = contenido
-        self.correo_emisor = cedula_emisor
+        self.correo_emisor = correo_emisor
         self.hora_envío = hora_envío
         self.fecha_envío = fecha_envío
         

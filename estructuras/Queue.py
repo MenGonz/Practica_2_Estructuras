@@ -9,7 +9,7 @@ class Queue(List):
     
     def dequeue(self):
         if self.size != 0:
-            ret = self.cabeza.dato
+            ret = self.head.getData()
             self.removeFirst()
             return ret
         else:
@@ -17,6 +17,6 @@ class Queue(List):
         
     def first(self):
         if self.size != 0: 
-            return self.cabeza.dato
+            return self.head.getData()
         else:
             return None
